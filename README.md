@@ -40,6 +40,7 @@ Este proyecto se centra en la implementación de un lenguaje de programación qu
 
 ## Colaboradores
 
-- [Nombre del Integrante 1](link al perfil de Github del integrante 1)
-- [Nombre del Integrante 2](link al perfil de Github del integrante 2)
-- [Nombre del Integrante 3](link al perfil de Github del integrante 3)
+
+- [Kevin Alejandro Diaz Cantillano](https://github.com/ixyz022)
+- [Ashly Yamilet Mazuela Ávalos](https://github.com/ashlyMazuela)
+- [Benjamín Alexander Zárate Chacana](https://github.com/ZarateBenjamin)
