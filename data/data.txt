@@ -1,0 +1,23 @@
+CAPA Capa1 {
+    CELDA Celda1 (SUSCEPTIBLE) VECINDAD { Celda2, Celda3 };
+    CELDA Celda2 (INFECTADO);
+    CELDA Celda3 (RECUPERADO);
+}
+
+CAPA Capa2 {
+    CELDA CeldaA (INFECTADO) VECINDAD { CeldaB };
+    CELDA CeldaB (SUSCEPTIBLE);
+}
+
+REGLA SUSCEPTIBLE -> INFECTADO SI INFECTADO EN { Celda2, Celda3 }
+REGLA INFECTADO -> RECUPERADO SI RECUPERADO EN { Celda3 }
+
+SIMULACION {
+    PASO {
+        Celda1 -> INFECTADO;
+        Celda2 -> RECUPERADO;
+    }
+    PASO {
+        CeldaA -> SUSCEPTIBLE;
+    }
+}
