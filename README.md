@@ -38,14 +38,6 @@ Este proyecto se centra en la implementación de un lenguaje de programación qu
 
 ---
 
-## Entrega
-
-- Código implementado con respaldo en un repositorio Github.
-- Presentación en clases de 15 minutos sobre la solución y ejemplo.
-- Subir el entregable en un único archivo .zip al Aula Virtual con el formato: `Certamen-1-ApellidoIntegrante1-ApellidoIntegrante2.zip`.
-
----
-
 ## Colaboradores
 
 - [Nombre del Integrante 1](link al perfil de Github del integrante 1)
