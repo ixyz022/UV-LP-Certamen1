@@ -1,5 +1,7 @@
 {
     "files.exclude": {
         "Certamen_I.pdf": true,
+        "*/__pycache__": true,
+        "venv": true
     }
 }

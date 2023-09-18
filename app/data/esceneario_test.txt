@@ -1,0 +1,13 @@
+CAPA PrimeraCapa {
+    CELDA Celda1 (SUSCEPTIBLE) VECINDAD { Celda2, Celda3 };
+    CELDA Celda2 (INFECTADO) VECINDAD { Celda1, Celda3 };
+    CELDA Celda3 (RECUPERADO) VECINDAD { Celda1, Celda3 };
+}
+
+CAPA SegundaCapa {
+    CELDA CeldaA (SUSCEPTIBLE) VECINDAD { CeldaB, Celda3 };
+    CELDA CeldaB (MUERTO) VECINDAD { CeldaA };
+}
+
+REGLA SUSCEPTIBLE -> INFECTADO SI INFECTADO EN { Celda1, Celda2 }
+REGLA INFECTADO -> RECUPERADO SI SUSCEPTIBLE EN { Celda3 }

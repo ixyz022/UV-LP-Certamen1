@@ -1,4 +1,4 @@
-# Generated from ANTLR/ACMulticapa.g4 by ANTLR 4.13.1
+# Generated from app/gramatica/ACMulticapa.g4 by ANTLR 4.13.1
 from antlr4 import *
 if "." in __name__:
     from .ACMulticapaParser import ACMulticapaParser
@@ -46,21 +46,6 @@ class ACMulticapaVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by ACMulticapaParser#condition.
     def visitCondition(self, ctx:ACMulticapaParser.ConditionContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by ACMulticapaParser#simulation.
-    def visitSimulation(self, ctx:ACMulticapaParser.SimulationContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by ACMulticapaParser#step.
-    def visitStep(self, ctx:ACMulticapaParser.StepContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by ACMulticapaParser#cellAction.
-    def visitCellAction(self, ctx:ACMulticapaParser.CellActionContext):
         return self.visitChildren(ctx)
 
 

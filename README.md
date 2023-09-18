@@ -13,7 +13,7 @@ Este proyecto se centra en la implementación de un lenguaje de programación qu
 
 ## Consideraciones
 
-- Programar usando Flex+Bison o ANTLR.
+- Programar usando ANTLR.
 - Defina las ER y GLC que sean necesarias.
 - Utilice tabla de símbolos si es necesario.
 - Grupos de máximo 3 integrantes.
@@ -39,7 +39,6 @@ Este proyecto se centra en la implementación de un lenguaje de programación qu
 ---
 
 ## Colaboradores
-
 
 - [Kevin Alejandro Diaz Cantillano](https://github.com/ixyz022)
 - [Ashly Yamilet Mazuela Ávalos](https://github.com/ashlyMazuela)
