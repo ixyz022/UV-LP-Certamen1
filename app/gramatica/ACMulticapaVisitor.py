@@ -1,4 +1,4 @@
-# Generated from app/gramatica/ACMulticapa.g4 by ANTLR 4.13.1
+# Generated from ACMulticapa.g4 by ANTLR 4.13.1
 from antlr4 import *
 if "." in __name__:
     from .ACMulticapaParser import ACMulticapaParser
@@ -29,13 +29,13 @@ class ACMulticapaVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by ACMulticapaParser#cellRef.
-    def visitCellRef(self, ctx:ACMulticapaParser.CellRefContext):
+    # Visit a parse tree produced by ACMulticapaParser#layeredCellRef.
+    def visitLayeredCellRef(self, ctx:ACMulticapaParser.LayeredCellRefContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by ACMulticapaParser#cellState.
-    def visitCellState(self, ctx:ACMulticapaParser.CellStateContext):
+    # Visit a parse tree produced by ACMulticapaParser#diseaseState.
+    def visitDiseaseState(self, ctx:ACMulticapaParser.DiseaseStateContext):
         return self.visitChildren(ctx)
 
 

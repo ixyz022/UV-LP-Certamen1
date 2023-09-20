@@ -6,7 +6,7 @@ program: layer+ transitionRule+ EOF;
 // Definiciones
 layer: 'CAPA' ID '{' cell+ '}';
 // layer: permite crear multiples capas, cada una con sus propias celdas
-cell: 'CELDA' ID '(' diseaseState ')' vecindad ';';
+cell: 'CELDA' ID '(' diseaseState ')' vecindad;
 // cell: permite crear multiples celdas, cada una con su propio estado de enfermedad
 vecindad:
 	'VECINDAD' '{' (layeredCellRef (',' layeredCellRef)*)? '}';

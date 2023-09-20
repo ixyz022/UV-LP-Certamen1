@@ -1,4 +1,4 @@
-# Generated from app/gramatica/ACMulticapa.g4 by ANTLR 4.13.1
+# Generated from ACMulticapa.g4 by ANTLR 4.13.1
 from antlr4 import *
 if "." in __name__:
     from .ACMulticapaParser import ACMulticapaParser
@@ -44,21 +44,21 @@ class ACMulticapaListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ACMulticapaParser#cellRef.
-    def enterCellRef(self, ctx:ACMulticapaParser.CellRefContext):
+    # Enter a parse tree produced by ACMulticapaParser#layeredCellRef.
+    def enterLayeredCellRef(self, ctx:ACMulticapaParser.LayeredCellRefContext):
         pass
 
-    # Exit a parse tree produced by ACMulticapaParser#cellRef.
-    def exitCellRef(self, ctx:ACMulticapaParser.CellRefContext):
+    # Exit a parse tree produced by ACMulticapaParser#layeredCellRef.
+    def exitLayeredCellRef(self, ctx:ACMulticapaParser.LayeredCellRefContext):
         pass
 
 
-    # Enter a parse tree produced by ACMulticapaParser#cellState.
-    def enterCellState(self, ctx:ACMulticapaParser.CellStateContext):
+    # Enter a parse tree produced by ACMulticapaParser#diseaseState.
+    def enterDiseaseState(self, ctx:ACMulticapaParser.DiseaseStateContext):
         pass
 
-    # Exit a parse tree produced by ACMulticapaParser#cellState.
-    def exitCellState(self, ctx:ACMulticapaParser.CellStateContext):
+    # Exit a parse tree produced by ACMulticapaParser#diseaseState.
+    def exitDiseaseState(self, ctx:ACMulticapaParser.DiseaseStateContext):
         pass
 
 
