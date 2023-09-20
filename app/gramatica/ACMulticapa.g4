@@ -16,10 +16,10 @@ layeredCellRef: ID '.' ID;
 
 diseaseState:
 	'SUSCEPTIBLE'
-	| 'EXPOSED' // Modelo SEIR y SEIRD
+	| 'EXPOSED' // Modelo SEIRD
 	| 'INFECTADO'
 	| 'RECUPERADO'
-	| 'MUERTO'; // Modelo SIRD y SEIRD
+	| 'MUERTO'; // Modelo SIRD
 // diseseState: permite definir los estados de la enfermedad
 
 transitionRule:
