@@ -22,21 +22,15 @@ class ACMulticapaInterpreter(ACMulticapaVisitor):
         self.rules = []
 
     def visitProgram(self, ctx: ACMulticapaParser.ProgramContext):
-        # Primero, determinamos cuántas capas hay para inicializar el tensor 3D
         self.num_layers = len(ctx.layer())
-        # Asumimos que todas las capas tienen la misma dimensión.
-        # Usamos la primera capa para determinar la dimensión
         num_cells = len(ctx.layer(0).cell())
         dim = int(np.sqrt(num_cells))
-        # Inicializamos el tensor 3D con ceros
         self.tensor = np.zeros((self.num_layers, dim, dim), dtype=int)
 
-        # Procesamos cada capa
         for layer_ctx in ctx.layer():
             self.visit(layer_ctx)
             self.current_layer_index += 1
 
-        # Procesamos cada regla de transición
         for rule_ctx in ctx.transitionRule():
             self.visit(rule_ctx)
 
@@ -59,11 +53,11 @@ class ACMulticapaInterpreter(ACMulticapaVisitor):
         from_state = self.STATE_MAP[self.visit(ctx.diseaseState(0))]
         to_state = self.STATE_MAP[self.visit(ctx.diseaseState(1))]
         condition = self.STATE_MAP[self.visit(ctx.condition())]
-        rule_data = {"from": from_state,
-                     "to": to_state, "condition": condition}
 
+        # Ahora agregamos las reglas como tuplas en lugar de diccionarios
+        rule_data = (from_state, to_state, condition)
         self.rules.append(rule_data)
 
     def visitCondition(self, ctx: ACMulticapaParser.ConditionContext):
         state = self.visit(ctx.diseaseState())
-        return state  # Cambia de {"state": state} a simplemente state
+        return state

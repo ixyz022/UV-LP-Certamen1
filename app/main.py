@@ -8,8 +8,8 @@ from antlr4 import FileStream, CommonTokenStream
 from antlr4.tree.Trees import Trees
 
 from controllers.ACMulticapaInterpreter import ACMulticapaInterpreter
-from controllers.simulacion import simulate_contagion
-from controllers.visualizar import visualizar
+from controllers.simulate_contagion import simulate_contagion
+# from controllers.interfaz import actualizar_interfaz
 
 # Carga de archivos
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -25,23 +25,30 @@ tree = parser.program()
 visitor = ACMulticapaInterpreter()
 visitor.visit(tree)
 
+num_steps = 1
+
+# actualizar_interfaz(visitor.tensor, visitor.rules, num_steps)
+simulate_contagion(visitor.tensor, visitor.rules, num_steps)
+
+
+# def print_tensor(tensor):
+#     for idx, layer in enumerate(tensor):
+#         print(f"Layer {idx + 1}:")
+#         print(layer)
+#         print("\n" + "-" * 20 + "\n")
+
+
+# print_tensor(visitor.tensor)
+
+
 # Imprime los resultados
 
 
-def print_tensor(tensor):
-    for idx, layer in enumerate(tensor):
-        print(f"Layer {idx + 1}:")
-        print(layer)
-        print("\n" + "-" * 20 + "\n")
+# print_tensor(visitor.tensor)
+
+# # visualizar(visitor.tensor)
 
 
-print_tensor(visitor.tensor)
-
-visualizar(visitor.tensor)
-
-
-print("\nTransition Rules:")
-for i in visitor.rules:
-    print(i)
-
-num_steps = 10
+# print("\nTransition Rules:")
+# for i in visitor.rules:
+#     print(i)
