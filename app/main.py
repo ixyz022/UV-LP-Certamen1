@@ -9,6 +9,7 @@ from antlr4.tree.Trees import Trees
 
 from controllers.ACMulticapaInterpreter import ACMulticapaInterpreter
 from controllers.simulacion import simulate_contagion
+from controllers.visualizar import visualizar
 
 # Carga de archivos
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -25,16 +26,22 @@ visitor = ACMulticapaInterpreter()
 visitor.visit(tree)
 
 # Imprime los resultados
-print("Layers:")
-for i in visitor.layers:
-    print(i)
+
+
+def print_tensor(tensor):
+    for idx, layer in enumerate(tensor):
+        print(f"Layer {idx + 1}:")
+        print(layer)
+        print("\n" + "-" * 20 + "\n")
+
+
+print_tensor(visitor.tensor)
+
+visualizar(visitor.tensor)
+
 
 print("\nTransition Rules:")
 for i in visitor.rules:
     print(i)
 
 num_steps = 10
-
-updated_layers = simulate_contagion(visitor.layers, visitor.rules, num_steps)
-for i in updated_layers:
-    print(i)
