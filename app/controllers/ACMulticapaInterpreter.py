@@ -15,7 +15,7 @@ class ACMulticapaInterpreter(ACMulticapaVisitor):
     }
 
     def __init__(self):
-        self.layers = {}  # Diccionario para almacenar matrices de las capas
+        self.layers = []  # Lista para almacenar matrices de las capas
         self.rules = []
 
     def visitProgram(self, ctx: ACMulticapaParser.ProgramContext):
@@ -25,7 +25,6 @@ class ACMulticapaInterpreter(ACMulticapaVisitor):
             self.visit(rule_ctx)
 
     def visitLayer(self, ctx: ACMulticapaParser.LayerContext):
-        layer_name = ctx.NUMBER().getText()
         num_cells = len(ctx.cell())
         dim = int(np.sqrt(num_cells))
 
@@ -35,7 +34,7 @@ class ACMulticapaInterpreter(ACMulticapaVisitor):
             disease_state = self.visit(cell_ctx.diseaseState())
             matrix[row, col] = self.STATE_MAP[disease_state]
 
-        self.layers[layer_name] = matrix
+        self.layers.append(matrix)
 
     def visitCell(self, ctx: ACMulticapaParser.CellContext):
         cell_number = int(ctx.NUMBER().getText())

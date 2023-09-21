@@ -27,8 +27,7 @@ visitor.visit(tree)
 # Imprime los resultados
 print("Layers:")
 for i in visitor.layers:
-    print("Layer", i)
-    print(visitor.layers[i])
+    print(i)
 
 print("\nTransition Rules:")
 for i in visitor.rules:
@@ -36,4 +35,6 @@ for i in visitor.rules:
 
 num_steps = 10
 
-simulate_contagion(visitor.layers, visitor.rules, num_steps)
+updated_layers = simulate_contagion(visitor.layers, visitor.rules, num_steps)
+for i in updated_layers:
+    print(i)
