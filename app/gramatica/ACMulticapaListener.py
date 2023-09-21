@@ -35,24 +35,6 @@ class ACMulticapaListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ACMulticapaParser#vecindad.
-    def enterVecindad(self, ctx:ACMulticapaParser.VecindadContext):
-        pass
-
-    # Exit a parse tree produced by ACMulticapaParser#vecindad.
-    def exitVecindad(self, ctx:ACMulticapaParser.VecindadContext):
-        pass
-
-
-    # Enter a parse tree produced by ACMulticapaParser#layeredCellRef.
-    def enterLayeredCellRef(self, ctx:ACMulticapaParser.LayeredCellRefContext):
-        pass
-
-    # Exit a parse tree produced by ACMulticapaParser#layeredCellRef.
-    def exitLayeredCellRef(self, ctx:ACMulticapaParser.LayeredCellRefContext):
-        pass
-
-
     # Enter a parse tree produced by ACMulticapaParser#diseaseState.
     def enterDiseaseState(self, ctx:ACMulticapaParser.DiseaseStateContext):
         pass

@@ -24,16 +24,6 @@ class ACMulticapaVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by ACMulticapaParser#vecindad.
-    def visitVecindad(self, ctx:ACMulticapaParser.VecindadContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by ACMulticapaParser#layeredCellRef.
-    def visitLayeredCellRef(self, ctx:ACMulticapaParser.LayeredCellRefContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by ACMulticapaParser#diseaseState.
     def visitDiseaseState(self, ctx:ACMulticapaParser.DiseaseStateContext):
         return self.visitChildren(ctx)

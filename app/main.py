@@ -3,13 +3,16 @@
 import os
 from gramatica.ACMulticapaLexer import ACMulticapaLexer
 from gramatica.ACMulticapaParser import ACMulticapaParser
-from gramatica.ACMulticapaVisitor import ACMulticapaVisitor
+
 from antlr4 import FileStream, CommonTokenStream
 from antlr4.tree.Trees import Trees
 
+from controllers.ACMulticapaInterpreter import ACMulticapaInterpreter
+from controllers.simulacion import simulate_contagion
+
+# Carga de archivos
 dir_path = os.path.dirname(os.path.realpath(__file__))
 file_path = os.path.join(dir_path, 'data', 'escenario1.txt')
-print(file_path)
 input_stream = FileStream(file_path)
 
 lexer = ACMulticapaLexer(input_stream)
@@ -18,9 +21,19 @@ parser = ACMulticapaParser(token_stream)
 
 tree = parser.program()
 
-rule_names = parser.ruleNames
-tree_str = Trees.toStringTree(tree, None, parser)
-print(tree_str)
-
-visitor = ACMulticapaVisitor()
+visitor = ACMulticapaInterpreter()
 visitor.visit(tree)
+
+# Imprime los resultados
+print("Layers:")
+for i in visitor.layers:
+    print("Layer", i)
+    print(visitor.layers[i])
+
+print("\nTransition Rules:")
+for i in visitor.rules:
+    print(i)
+
+num_steps = 10
+
+simulate_contagion(visitor.layers, visitor.rules, num_steps)

@@ -17,31 +17,30 @@ public class ACMulticapaParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
-		T__17=18, T__18=19, ID=20, NUMBER=21, WS=22;
+		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, STRING=16, 
+		NUMBER=17, WS=18;
 	public static final int
-		RULE_program = 0, RULE_layer = 1, RULE_cell = 2, RULE_vecindad = 3, RULE_layeredCellRef = 4, 
-		RULE_diseaseState = 5, RULE_transitionRule = 6, RULE_condition = 7;
+		RULE_program = 0, RULE_layer = 1, RULE_cell = 2, RULE_diseaseState = 3, 
+		RULE_transitionRule = 4, RULE_condition = 5;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"program", "layer", "cell", "vecindad", "layeredCellRef", "diseaseState", 
-			"transitionRule", "condition"
+			"program", "layer", "cell", "diseaseState", "transitionRule", "condition"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'CAPA'", "'{'", "'}'", "'CELDA'", "'('", "')'", "'VECINDAD'", 
-			"','", "'.'", "'SUSCEPTIBLE'", "'EXPOSED'", "'INFECTADO'", "'RECUPERADO'", 
-			"'MUERTO'", "'REGLA'", "'->'", "'SI'", "'RATE'", "'EN'"
+			null, "'CAPA'", "'{'", "'}'", "'CELDA'", "'('", "')'", "'SUSCEPTIBLE'", 
+			"'EXPOSED'", "'INFECTADO'", "'RECUPERADO'", "'MUERTO'", "'REGLA'", "'->'", 
+			"'SI'", "'VECINOS'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, null, null, null, null, null, null, null, "ID", "NUMBER", "WS"
+			null, null, null, null, "STRING", "NUMBER", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -122,35 +121,35 @@ public class ACMulticapaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(17); 
+			setState(13); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(16);
+				setState(12);
 				layer();
 				}
 				}
-				setState(19); 
+				setState(15); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==T__0 );
-			setState(22); 
+			setState(18); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(21);
+				setState(17);
 				transitionRule();
 				}
 				}
-				setState(24); 
+				setState(20); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( _la==T__14 );
-			setState(26);
+			} while ( _la==T__11 );
+			setState(22);
 			match(EOF);
 			}
 		}
@@ -166,7 +165,7 @@ public class ACMulticapaParser extends Parser {
 	}
 
 	public static class LayerContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(ACMulticapaParser.ID, 0); }
+		public TerminalNode NUMBER() { return getToken(ACMulticapaParser.NUMBER, 0); }
 		public List<CellContext> cell() {
 			return getRuleContexts(CellContext.class);
 		}
@@ -186,27 +185,27 @@ public class ACMulticapaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(28);
+			setState(24);
 			match(T__0);
-			setState(29);
-			match(ID);
-			setState(30);
+			setState(25);
+			match(NUMBER);
+			setState(26);
 			match(T__1);
-			setState(32); 
+			setState(28); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(31);
+				setState(27);
 				cell();
 				}
 				}
-				setState(34); 
+				setState(30); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==T__3 );
-			setState(36);
+			setState(32);
 			match(T__2);
 			}
 		}
@@ -222,12 +221,9 @@ public class ACMulticapaParser extends Parser {
 	}
 
 	public static class CellContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(ACMulticapaParser.ID, 0); }
+		public TerminalNode NUMBER() { return getToken(ACMulticapaParser.NUMBER, 0); }
 		public DiseaseStateContext diseaseState() {
 			return getRuleContext(DiseaseStateContext.class,0);
-		}
-		public VecindadContext vecindad() {
-			return getRuleContext(VecindadContext.class,0);
 		}
 		public CellContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -241,119 +237,16 @@ public class ACMulticapaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(38);
+			setState(34);
 			match(T__3);
-			setState(39);
-			match(ID);
-			setState(40);
+			setState(35);
+			match(NUMBER);
+			setState(36);
 			match(T__4);
-			setState(41);
+			setState(37);
 			diseaseState();
-			setState(42);
+			setState(38);
 			match(T__5);
-			setState(43);
-			vecindad();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class VecindadContext extends ParserRuleContext {
-		public List<LayeredCellRefContext> layeredCellRef() {
-			return getRuleContexts(LayeredCellRefContext.class);
-		}
-		public LayeredCellRefContext layeredCellRef(int i) {
-			return getRuleContext(LayeredCellRefContext.class,i);
-		}
-		public VecindadContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_vecindad; }
-	}
-
-	public final VecindadContext vecindad() throws RecognitionException {
-		VecindadContext _localctx = new VecindadContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_vecindad);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(45);
-			match(T__6);
-			setState(46);
-			match(T__1);
-			setState(55);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if (_la==ID) {
-				{
-				setState(47);
-				layeredCellRef();
-				setState(52);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-				while (_la==T__7) {
-					{
-					{
-					setState(48);
-					match(T__7);
-					setState(49);
-					layeredCellRef();
-					}
-					}
-					setState(54);
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-				}
-				}
-			}
-
-			setState(57);
-			match(T__2);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class LayeredCellRefContext extends ParserRuleContext {
-		public List<TerminalNode> ID() { return getTokens(ACMulticapaParser.ID); }
-		public TerminalNode ID(int i) {
-			return getToken(ACMulticapaParser.ID, i);
-		}
-		public LayeredCellRefContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_layeredCellRef; }
-	}
-
-	public final LayeredCellRefContext layeredCellRef() throws RecognitionException {
-		LayeredCellRefContext _localctx = new LayeredCellRefContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_layeredCellRef);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(59);
-			match(ID);
-			setState(60);
-			match(T__8);
-			setState(61);
-			match(ID);
 			}
 		}
 		catch (RecognitionException re) {
@@ -376,14 +269,14 @@ public class ACMulticapaParser extends Parser {
 
 	public final DiseaseStateContext diseaseState() throws RecognitionException {
 		DiseaseStateContext _localctx = new DiseaseStateContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_diseaseState);
+		enterRule(_localctx, 6, RULE_diseaseState);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(63);
+			setState(40);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__9) | (1L << T__10) | (1L << T__11) | (1L << T__12) | (1L << T__13))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__6) | (1L << T__7) | (1L << T__8) | (1L << T__9) | (1L << T__10))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -414,7 +307,6 @@ public class ACMulticapaParser extends Parser {
 		public ConditionContext condition() {
 			return getRuleContext(ConditionContext.class,0);
 		}
-		public TerminalNode NUMBER() { return getToken(ACMulticapaParser.NUMBER, 0); }
 		public TransitionRuleContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -423,26 +315,22 @@ public class ACMulticapaParser extends Parser {
 
 	public final TransitionRuleContext transitionRule() throws RecognitionException {
 		TransitionRuleContext _localctx = new TransitionRuleContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_transitionRule);
+		enterRule(_localctx, 8, RULE_transitionRule);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(65);
-			match(T__14);
-			setState(66);
+			setState(42);
+			match(T__11);
+			setState(43);
 			diseaseState();
-			setState(67);
-			match(T__15);
-			setState(68);
+			setState(44);
+			match(T__12);
+			setState(45);
 			diseaseState();
-			setState(69);
-			match(T__16);
-			setState(70);
+			setState(46);
+			match(T__13);
+			setState(47);
 			condition();
-			setState(71);
-			match(T__17);
-			setState(72);
-			match(NUMBER);
 			}
 		}
 		catch (RecognitionException re) {
@@ -460,12 +348,6 @@ public class ACMulticapaParser extends Parser {
 		public DiseaseStateContext diseaseState() {
 			return getRuleContext(DiseaseStateContext.class,0);
 		}
-		public List<LayeredCellRefContext> layeredCellRef() {
-			return getRuleContexts(LayeredCellRefContext.class);
-		}
-		public LayeredCellRefContext layeredCellRef(int i) {
-			return getRuleContext(LayeredCellRefContext.class,i);
-		}
 		public ConditionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -474,45 +356,14 @@ public class ACMulticapaParser extends Parser {
 
 	public final ConditionContext condition() throws RecognitionException {
 		ConditionContext _localctx = new ConditionContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_condition);
-		int _la;
+		enterRule(_localctx, 10, RULE_condition);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(74);
+			setState(49);
+			match(T__14);
+			setState(50);
 			diseaseState();
-			setState(75);
-			match(T__18);
-			setState(76);
-			match(T__1);
-			setState(85);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if (_la==ID) {
-				{
-				setState(77);
-				layeredCellRef();
-				setState(82);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-				while (_la==T__7) {
-					{
-					{
-					setState(78);
-					match(T__7);
-					setState(79);
-					layeredCellRef();
-					}
-					}
-					setState(84);
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-				}
-				}
-			}
-
-			setState(87);
-			match(T__2);
 			}
 		}
 		catch (RecognitionException re) {
@@ -527,28 +378,20 @@ public class ACMulticapaParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\30\\\4\2\t\2\4\3"+
-		"\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\3\2\6\2\24\n\2\r"+
-		"\2\16\2\25\3\2\6\2\31\n\2\r\2\16\2\32\3\2\3\2\3\3\3\3\3\3\3\3\6\3#\n\3"+
-		"\r\3\16\3$\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5\7\5"+
-		"\65\n\5\f\5\16\58\13\5\5\5:\n\5\3\5\3\5\3\6\3\6\3\6\3\6\3\7\3\7\3\b\3"+
-		"\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\t\3\t\3\t\3\t\3\t\3\t\7\tS\n\t\f\t\16"+
-		"\tV\13\t\5\tX\n\t\3\t\3\t\3\t\2\2\n\2\4\6\b\n\f\16\20\2\3\3\2\f\20\2Z"+
-		"\2\23\3\2\2\2\4\36\3\2\2\2\6(\3\2\2\2\b/\3\2\2\2\n=\3\2\2\2\fA\3\2\2\2"+
-		"\16C\3\2\2\2\20L\3\2\2\2\22\24\5\4\3\2\23\22\3\2\2\2\24\25\3\2\2\2\25"+
-		"\23\3\2\2\2\25\26\3\2\2\2\26\30\3\2\2\2\27\31\5\16\b\2\30\27\3\2\2\2\31"+
-		"\32\3\2\2\2\32\30\3\2\2\2\32\33\3\2\2\2\33\34\3\2\2\2\34\35\7\2\2\3\35"+
-		"\3\3\2\2\2\36\37\7\3\2\2\37 \7\26\2\2 \"\7\4\2\2!#\5\6\4\2\"!\3\2\2\2"+
-		"#$\3\2\2\2$\"\3\2\2\2$%\3\2\2\2%&\3\2\2\2&\'\7\5\2\2\'\5\3\2\2\2()\7\6"+
-		"\2\2)*\7\26\2\2*+\7\7\2\2+,\5\f\7\2,-\7\b\2\2-.\5\b\5\2.\7\3\2\2\2/\60"+
-		"\7\t\2\2\609\7\4\2\2\61\66\5\n\6\2\62\63\7\n\2\2\63\65\5\n\6\2\64\62\3"+
-		"\2\2\2\658\3\2\2\2\66\64\3\2\2\2\66\67\3\2\2\2\67:\3\2\2\28\66\3\2\2\2"+
-		"9\61\3\2\2\29:\3\2\2\2:;\3\2\2\2;<\7\5\2\2<\t\3\2\2\2=>\7\26\2\2>?\7\13"+
-		"\2\2?@\7\26\2\2@\13\3\2\2\2AB\t\2\2\2B\r\3\2\2\2CD\7\21\2\2DE\5\f\7\2"+
-		"EF\7\22\2\2FG\5\f\7\2GH\7\23\2\2HI\5\20\t\2IJ\7\24\2\2JK\7\27\2\2K\17"+
-		"\3\2\2\2LM\5\f\7\2MN\7\25\2\2NW\7\4\2\2OT\5\n\6\2PQ\7\n\2\2QS\5\n\6\2"+
-		"RP\3\2\2\2SV\3\2\2\2TR\3\2\2\2TU\3\2\2\2UX\3\2\2\2VT\3\2\2\2WO\3\2\2\2"+
-		"WX\3\2\2\2XY\3\2\2\2YZ\7\5\2\2Z\21\3\2\2\2\t\25\32$\669TW";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\24\67\4\2\t\2\4\3"+
+		"\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\3\2\6\2\20\n\2\r\2\16\2\21\3\2\6"+
+		"\2\25\n\2\r\2\16\2\26\3\2\3\2\3\3\3\3\3\3\3\3\6\3\37\n\3\r\3\16\3 \3\3"+
+		"\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\7\3"+
+		"\7\3\7\3\7\2\2\b\2\4\6\b\n\f\2\3\3\2\t\r\2\63\2\17\3\2\2\2\4\32\3\2\2"+
+		"\2\6$\3\2\2\2\b*\3\2\2\2\n,\3\2\2\2\f\63\3\2\2\2\16\20\5\4\3\2\17\16\3"+
+		"\2\2\2\20\21\3\2\2\2\21\17\3\2\2\2\21\22\3\2\2\2\22\24\3\2\2\2\23\25\5"+
+		"\n\6\2\24\23\3\2\2\2\25\26\3\2\2\2\26\24\3\2\2\2\26\27\3\2\2\2\27\30\3"+
+		"\2\2\2\30\31\7\2\2\3\31\3\3\2\2\2\32\33\7\3\2\2\33\34\7\23\2\2\34\36\7"+
+		"\4\2\2\35\37\5\6\4\2\36\35\3\2\2\2\37 \3\2\2\2 \36\3\2\2\2 !\3\2\2\2!"+
+		"\"\3\2\2\2\"#\7\5\2\2#\5\3\2\2\2$%\7\6\2\2%&\7\23\2\2&\'\7\7\2\2\'(\5"+
+		"\b\5\2()\7\b\2\2)\7\3\2\2\2*+\t\2\2\2+\t\3\2\2\2,-\7\16\2\2-.\5\b\5\2"+
+		"./\7\17\2\2/\60\5\b\5\2\60\61\7\20\2\2\61\62\5\f\7\2\62\13\3\2\2\2\63"+
+		"\64\7\21\2\2\64\65\5\b\5\2\65\r\3\2\2\2\5\21\26 ";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
