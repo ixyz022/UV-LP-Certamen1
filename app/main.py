@@ -25,7 +25,7 @@ tree = parser.program()
 visitor = ACMulticapaInterpreter()
 visitor.visit(tree)
 
-num_steps = 1
+num_steps = 40
 
 # actualizar_interfaz(visitor.tensor, visitor.rules, num_steps)
 simulate_contagion(visitor.tensor, visitor.rules, num_steps)

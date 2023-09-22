@@ -5,15 +5,6 @@ from gramatica.ACMulticapaVisitor import ACMulticapaVisitor
 
 class ACMulticapaInterpreter(ACMulticapaVisitor):
 
-    # Mapeo de estados a números
-    STATE_MAP = {
-        'SUSCEPTIBLE': 1,
-        'EXPOSED': 2,
-        'INFECTADO': 3,
-        'RECUPERADO': 4,
-        'MUERTO': 5
-    }
-
     def __init__(self):
         self.num_layers = 0   # Inicialmente, asumimos que no sabemos cuántas capas hay
         # Esto se usará para saber en qué "capa" del tensor 3D estamos escribiendo
@@ -25,7 +16,7 @@ class ACMulticapaInterpreter(ACMulticapaVisitor):
         self.num_layers = len(ctx.layer())
         num_cells = len(ctx.layer(0).cell())
         dim = int(np.sqrt(num_cells))
-        self.tensor = np.zeros((self.num_layers, dim, dim), dtype=int)
+        self.tensor = np.empty((self.num_layers, dim, dim), dtype=object)
 
         for layer_ctx in ctx.layer():
             self.visit(layer_ctx)
@@ -38,23 +29,22 @@ class ACMulticapaInterpreter(ACMulticapaVisitor):
         for index, cell_ctx in enumerate(ctx.cell()):
             row, col = divmod(index, self.tensor.shape[1])
             disease_state = self.visit(cell_ctx.diseaseState())
-            self.tensor[self.current_layer_index, row,
-                        col] = self.STATE_MAP[disease_state]
+            self.tensor[self.current_layer_index, row, col] = disease_state
 
     def visitCell(self, ctx: ACMulticapaParser.CellContext):
         cell_number = int(ctx.NUMBER().getText())
-        disease_state = self.STATE_MAP[self.visit(ctx.diseaseState())]
+        disease_state = self.visit(ctx.diseaseState())
         return [cell_number, disease_state]
 
     def visitDiseaseState(self, ctx: ACMulticapaParser.DiseaseStateContext):
         return ctx.getText()
 
     def visitTransitionRule(self, ctx: ACMulticapaParser.TransitionRuleContext):
-        from_state = self.STATE_MAP[self.visit(ctx.diseaseState(0))]
-        to_state = self.STATE_MAP[self.visit(ctx.diseaseState(1))]
-        condition = self.STATE_MAP[self.visit(ctx.condition())]
+        from_state = self.visit(ctx.diseaseState(0))
+        to_state = self.visit(ctx.diseaseState(1))
+        condition = self.visit(ctx.condition())
 
-        # Ahora agregamos las reglas como tuplas en lugar de diccionarios
+        # Ahora agregamos las reglas como tuplas
         rule_data = (from_state, to_state, condition)
         self.rules.append(rule_data)
 
