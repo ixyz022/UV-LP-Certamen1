@@ -1,63 +1,63 @@
 import numpy as np
-import copy
 import random
 
-
-def simulate_contagion02(layer, rules, steps):
-    changes = 0
-    while changes < steps:
-        for x in range(layer.shape[0]):
-            for y in range(layer.shape[1]):
-                cell_info = layer[x, y]
-                neighbours = get_neighbours(layer, x, y)
-                new_cell_info = apply_rule(cell_info, neighbours, rules)
-
-                if new_cell_info != cell_info:
-                    layer[x, y] = new_cell_info
-                    changes += 1
-                    print(f"Paso {changes}:\n", layer)
-
-                    if changes == steps:
-                        return
+# Función para obtener los vecinos de Moore en una matriz 3D
 
 
-def get_neighbours(layer, x, y):
-    neighbours = []
-    for i in [-1, 0, 1]:
-        for j in [-1, 0, 1]:
-            if i == 0 and j == 0:
-                continue
-            if 0 <= x + i < layer.shape[0] and 0 <= y + j < layer.shape[1]:
-                neighbours.append(layer[x + i, y + j])
-    return neighbours
+def obtener_vecinos(coord, matriz):
+    x, y, z = coord
+    vecinos = []
+    for dx in [-1, 0, 1]:
+        for dy in [-1, 0, 1]:
+            for dz in [-1, 0, 1]:
+                if dx == dy == dz == 0:
+                    continue  # Saltar la celda misma
+                vecinos.append((x + dx, y + dy, z + dz))
+    return [vec for vec in vecinos if 0 <= vec[0] < matriz.shape[0] and 0 <= vec[1] < matriz.shape[1] and 0 <= vec[2] < matriz.shape[2]]
+
+# Función para ejecutar un paso de la simulación
 
 
-def apply_rule(cell_info, neighbours, rules):
-    # deep copy to avoid modifying original dict
-    new_cell_info = copy.deepcopy(cell_info)
+def ejecutar_paso(coord, matriz):
+    celda = matriz[coord]
+    vecinos = obtener_vecinos(coord, matriz)
 
-    for from_state, to_state, condition in rules:
-        # Seleccionamos una celda vecina aleatoriamente para aplicar la regla
-        neighbour = random.choice(neighbours) if neighbours else None
+    if not vecinos:
+        return  # No hay vecinos, no se puede hacer nada
 
-        if neighbour and condition in neighbour['states']:
-            affected_people = random.randint(1, neighbour['states'][condition])
+    estado_aleatorio = random.choice(list(celda['states'].keys()))
 
-            # Aplicamos la regla si hay suficientes personas en el estado 'from_state'
-            if from_state in cell_info['states'] and cell_info['states'][from_state] >= affected_people:
-                new_cell_info['states'][from_state] -= affected_people
+    # Verificar si hay personas en el estado seleccionado
+    if celda['states'][estado_aleatorio] == 0:
+        return  # No hay personas, salir de la función
 
-                # Aumentamos el estado de destino en la celda actual
-                new_cell_info['states'][to_state] = new_cell_info['states'].get(
-                    to_state, 0) + affected_people
+    cantidad_personas = random.randint(1, celda['states'][estado_aleatorio])
+    personas_por_vecino = cantidad_personas // len(vecinos)
+    # Personas que no se pueden distribuir equitativamente
+    personas_restantes = cantidad_personas % len(vecinos)
 
-                # Disminuimos el estado de origen en la celda vecina
-                neighbour['states'][condition] -= affected_people
+    # Actualizar la población y el estado en la celda actual
+    celda['population'] -= (cantidad_personas - personas_restantes)
+    celda['states'][estado_aleatorio] -= (
+        cantidad_personas - personas_restantes)
 
-                # Aumentamos el estado de destino en la celda vecina
-                neighbour['states'][from_state] = neighbour['states'].get(
-                    from_state, 0) + affected_people
+    # Distribuir la población a las celdas vecinas
+    for vecino_coord in vecinos:
+        vecino = matriz[vecino_coord]
+        if estado_aleatorio not in vecino['states']:
+            vecino['states'][estado_aleatorio] = 0
+        vecino['states'][estado_aleatorio] += personas_por_vecino
+        vecino['population'] += personas_por_vecino
 
-                return new_cell_info
 
-    return cell_info  # return the original cell_info if no rules are applied
+def simulate_contagion02(matriz, num_steps):
+    contador = 0
+    total_celdas = matriz.shape[0] * matriz.shape[1] * matriz.shape[2]
+    while contador < num_steps * total_celdas:  # Ajuste en la condición del bucle
+        for x in range(matriz.shape[0]):
+            for y in range(matriz.shape[1]):
+                for z in range(matriz.shape[2]):
+                    ejecutar_paso((x, y, z), matriz)
+                    # Imprimir el estado de la matriz después de cada pasoprimir el estado de la matriz después de cada paso
+                    print(matriz, "\n")
+                    contador += 1

@@ -1,0 +1,9 @@
+imaginemos, que estamos en la cerda (0,0,0), no entiendo porque en su iteracion, donde se supone que es esta celda, la que viaja al resto de sus vecinos, no disminiye para realizar el cambio, sino que se queda igual y hasta cambia esta misma, en cada paso, cuando por ejemplo, el flujo esperado es que
+1. trabajo en este celda
+2. obtengo todos sus vecinos
+3. selecciono un estado de la celda
+4. selecciono una cantidad aleatoria de personas dentro de ese estado, la cantidad de personas no puede ser mayor a la cantidad actual en ese estado
+5. luego esa cantida de personas se reparte equitativamente para que almenos una viaje a cada celda vecina
+6. se disminuye la cantidad de poblacion total dentro de la celda actual para adaptarse a la poblacion que perdio porque viajo
+7. el resto de celdas que estan recibiendo a la poblacion, si no tienen el estado que viene ne camino, se crea para recibirlos, ademas su poblacion aumenta en consecuencia de la poblacion que llego,
+8. termina el paso y se muestra

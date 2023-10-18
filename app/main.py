@@ -60,8 +60,8 @@ def seleccionar_pasos_simulacion():
 
 def seleccionar_gramatica():
     print("Por favor, selecciona una gramática:")
-    print("1: ACMulticapa01")
-    print("2: ACMulticapa02")
+    print("1: ACMulticapa normal")
+    print("2: ACMulticapa poblacional")
     print("3: ACMulticapa03")
     print("4: ACMulticapa04")
 
@@ -94,7 +94,8 @@ def realizar_simulacion(file_path, num_steps, gramatica_opcion):
         tree = parser.program()
         visitor = ACMulticapa02Interpreter()
         visitor.visit(tree)
-        simulate_contagion02(visitor.tensor, visitor.rules, num_steps)
+        # print(visitor.tensor, visitor.rules)
+        simulate_contagion02(visitor.tensor, num_steps)
     # elif gramatica_opcion == 3:
     #     lexer = ACMulticapa03Lexer(input_stream)
     #     parser = ACMulticapa03Parser(CommonTokenStream(lexer))

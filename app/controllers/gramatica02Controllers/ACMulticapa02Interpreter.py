@@ -15,7 +15,6 @@ class ACMulticapa02Interpreter(ACMulticapa02Visitor):
         self.num_layers = len(ctx.layer())
         num_cells = len(ctx.layer(0).cell())
         dim = int(np.sqrt(num_cells))
-        print(f"Num layers: {self.num_layers}, Dim: {dim}")  # Debug
         self.tensor = np.empty((self.num_layers, dim, dim), dtype=object)
 
         for layer_ctx in ctx.layer():
@@ -25,20 +24,11 @@ class ACMulticapa02Interpreter(ACMulticapa02Visitor):
         for rule_ctx in ctx.transitionRule():
             self.visit(rule_ctx)
 
-
-def visitLayer(self, ctx: ACMulticapa02Parser.LayerContext):
-    for index, cell_ctx in enumerate(ctx.cell()):
-        row, col = divmod(index, self.tensor.shape[1])
-        # Debug
-        print(
-            f"Current layer index: {self.current_layer_index}, Row: {row}, Col: {col}")
-        if self.current_layer_index < self.tensor.shape[0] and \
-           row < self.tensor.shape[1] and \
-           col < self.tensor.shape[2]:
+    def visitLayer(self, ctx: ACMulticapa02Parser.LayerContext):
+        for index, cell_ctx in enumerate(ctx.cell()):
+            row, col = divmod(index, self.tensor.shape[1])
             cell_info = self.visit(cell_ctx)
             self.tensor[self.current_layer_index, row, col] = cell_info
-        else:
-            print("Index out of bounds.")  # Debug
 
     def visitCell(self, ctx: ACMulticapa02Parser.CellContext):
         population = int(ctx.NUMBER()[1].getText())
@@ -56,5 +46,5 @@ def visitLayer(self, ctx: ACMulticapa02Parser.LayerContext):
     def visitTransitionRule(self, ctx: ACMulticapa02Parser.TransitionRuleContext):
         from_state = ctx.stateName()[0].getText()
         to_state = ctx.stateName()[1].getText()
-        condition = ctx.condition().getText()
-        self.rules.append((from_state, to_state, condition))
+        condition_state = ctx.condition().stateName().getText()
+        self.rules.append((from_state, to_state, condition_state))
