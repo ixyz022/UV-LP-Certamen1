@@ -1,4 +1,4 @@
-# Generated from ACMulticapa.g4 by ANTLR 4.13.1
+# Generated from ACMulticapa01.g4 by ANTLR 4.13.1
 from antlr4 import *
 from io import StringIO
 import sys
@@ -64,7 +64,7 @@ def serializedATN():
         0
     ]
 
-class ACMulticapaLexer(Lexer):
+class ACMulticapa01Lexer(Lexer):
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
@@ -105,7 +105,7 @@ class ACMulticapaLexer(Lexer):
                   "T__7", "T__8", "T__9", "T__10", "T__11", "T__12", "T__13", 
                   "T__14", "STRING", "NUMBER", "WS" ]
 
-    grammarFileName = "ACMulticapa.g4"
+    grammarFileName = "ACMulticapa01.g4"
 
     def __init__(self, input=None, output:TextIO = sys.stdout):
         super().__init__(input, output)

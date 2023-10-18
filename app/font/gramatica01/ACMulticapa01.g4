@@ -1,4 +1,4 @@
-grammar ACMulticapa;
+grammar ACMulticapa01;
 
 // Puntos de entrada
 program: layer+ transitionRule+ EOF;

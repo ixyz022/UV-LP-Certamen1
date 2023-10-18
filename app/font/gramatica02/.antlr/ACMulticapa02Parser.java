@@ -1,4 +1,4 @@
-// Generated from d:\Documentos\Development Projects\UV-LP-Certamen1\app\gramatica\ACMulticapa.g4 by ANTLR 4.9.2
+// Generated from c:/Users/ixyz0/Personal/Dev/UV-LP-Certamen1/app/font/gramatica02/ACMulticapa02.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -8,39 +8,40 @@ import java.util.List;
 import java.util.Iterator;
 import java.util.ArrayList;
 
-@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class ACMulticapaParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.9.2", RuntimeMetaData.VERSION); }
+@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
+public class ACMulticapa02Parser extends Parser {
+	static { RuntimeMetaData.checkVersion("4.13.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, STRING=16, 
-		NUMBER=17, WS=18;
+		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, STRING=17, 
+		NUMBER=18, WS=19;
 	public static final int
 		RULE_program = 0, RULE_layer = 1, RULE_cell = 2, RULE_diseaseState = 3, 
-		RULE_transitionRule = 4, RULE_condition = 5;
+		RULE_stateName = 4, RULE_transitionRule = 5, RULE_condition = 6;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"program", "layer", "cell", "diseaseState", "transitionRule", "condition"
+			"program", "layer", "cell", "diseaseState", "stateName", "transitionRule", 
+			"condition"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'CAPA'", "'{'", "'}'", "'CELDA'", "'('", "')'", "'SUSCEPTIBLE'", 
-			"'EXPOSED'", "'INFECTADO'", "'RECUPERADO'", "'MUERTO'", "'REGLA'", "'->'", 
-			"'SI'", "'VECINOS'"
+			null, "'CAPA'", "'{'", "'}'", "'CELDA'", "'POBLACION'", "','", "':'", 
+			"'SUSCEPTIBLE'", "'EXPOSED'", "'INFECTADO'", "'RECUPERADO'", "'MUERTO'", 
+			"'REGLA'", "'->'", "'SI'", "'VECINOS'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, null, null, null, "STRING", "NUMBER", "WS"
+			null, null, null, null, null, "STRING", "NUMBER", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -78,7 +79,7 @@ public class ACMulticapaParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "ACMulticapa.g4"; }
+	public String getGrammarFileName() { return "ACMulticapa02.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -89,13 +90,14 @@ public class ACMulticapaParser extends Parser {
 	@Override
 	public ATN getATN() { return _ATN; }
 
-	public ACMulticapaParser(TokenStream input) {
+	public ACMulticapa02Parser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ProgramContext extends ParserRuleContext {
-		public TerminalNode EOF() { return getToken(ACMulticapaParser.EOF, 0); }
+		public TerminalNode EOF() { return getToken(ACMulticapa02Parser.EOF, 0); }
 		public List<LayerContext> layer() {
 			return getRuleContexts(LayerContext.class);
 		}
@@ -121,35 +123,35 @@ public class ACMulticapaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(13); 
+			setState(15); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(12);
+				setState(14);
 				layer();
 				}
 				}
-				setState(15); 
+				setState(17); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==T__0 );
-			setState(18); 
+			setState(20); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(17);
+				setState(19);
 				transitionRule();
 				}
 				}
-				setState(20); 
+				setState(22); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( _la==T__11 );
-			setState(22);
+			} while ( _la==T__12 );
+			setState(24);
 			match(EOF);
 			}
 		}
@@ -164,8 +166,9 @@ public class ACMulticapaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class LayerContext extends ParserRuleContext {
-		public TerminalNode NUMBER() { return getToken(ACMulticapaParser.NUMBER, 0); }
+		public TerminalNode NUMBER() { return getToken(ACMulticapa02Parser.NUMBER, 0); }
 		public List<CellContext> cell() {
 			return getRuleContexts(CellContext.class);
 		}
@@ -185,27 +188,27 @@ public class ACMulticapaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(24);
-			match(T__0);
-			setState(25);
-			match(NUMBER);
 			setState(26);
+			match(T__0);
+			setState(27);
+			match(NUMBER);
+			setState(28);
 			match(T__1);
-			setState(28); 
+			setState(30); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(27);
+				setState(29);
 				cell();
 				}
 				}
-				setState(30); 
+				setState(32); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==T__3 );
-			setState(32);
+			setState(34);
 			match(T__2);
 			}
 		}
@@ -220,10 +223,17 @@ public class ACMulticapaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class CellContext extends ParserRuleContext {
-		public TerminalNode NUMBER() { return getToken(ACMulticapaParser.NUMBER, 0); }
-		public DiseaseStateContext diseaseState() {
-			return getRuleContext(DiseaseStateContext.class,0);
+		public List<TerminalNode> NUMBER() { return getTokens(ACMulticapa02Parser.NUMBER); }
+		public TerminalNode NUMBER(int i) {
+			return getToken(ACMulticapa02Parser.NUMBER, i);
+		}
+		public List<DiseaseStateContext> diseaseState() {
+			return getRuleContexts(DiseaseStateContext.class);
+		}
+		public DiseaseStateContext diseaseState(int i) {
+			return getRuleContext(DiseaseStateContext.class,i);
 		}
 		public CellContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -234,19 +244,40 @@ public class ACMulticapaParser extends Parser {
 	public final CellContext cell() throws RecognitionException {
 		CellContext _localctx = new CellContext(_ctx, getState());
 		enterRule(_localctx, 4, RULE_cell);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(34);
-			match(T__3);
-			setState(35);
-			match(NUMBER);
 			setState(36);
-			match(T__4);
+			match(T__3);
 			setState(37);
-			diseaseState();
+			match(NUMBER);
 			setState(38);
-			match(T__5);
+			match(T__4);
+			setState(39);
+			match(NUMBER);
+			setState(40);
+			match(T__1);
+			setState(41);
+			diseaseState();
+			setState(46);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==T__5) {
+				{
+				{
+				setState(42);
+				match(T__5);
+				setState(43);
+				diseaseState();
+				}
+				}
+				setState(48);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
+			setState(49);
+			match(T__2);
 			}
 		}
 		catch (RecognitionException re) {
@@ -260,7 +291,12 @@ public class ACMulticapaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class DiseaseStateContext extends ParserRuleContext {
+		public StateNameContext stateName() {
+			return getRuleContext(StateNameContext.class,0);
+		}
+		public TerminalNode NUMBER() { return getToken(ACMulticapa02Parser.NUMBER, 0); }
 		public DiseaseStateContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -270,13 +306,46 @@ public class ACMulticapaParser extends Parser {
 	public final DiseaseStateContext diseaseState() throws RecognitionException {
 		DiseaseStateContext _localctx = new DiseaseStateContext(_ctx, getState());
 		enterRule(_localctx, 6, RULE_diseaseState);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(51);
+			stateName();
+			setState(52);
+			match(T__6);
+			setState(53);
+			match(NUMBER);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class StateNameContext extends ParserRuleContext {
+		public StateNameContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_stateName; }
+	}
+
+	public final StateNameContext stateName() throws RecognitionException {
+		StateNameContext _localctx = new StateNameContext(_ctx, getState());
+		enterRule(_localctx, 8, RULE_stateName);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(40);
+			setState(55);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__6) | (1L << T__7) | (1L << T__8) | (1L << T__9) | (1L << T__10))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 7936L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -297,12 +366,13 @@ public class ACMulticapaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class TransitionRuleContext extends ParserRuleContext {
-		public List<DiseaseStateContext> diseaseState() {
-			return getRuleContexts(DiseaseStateContext.class);
+		public List<StateNameContext> stateName() {
+			return getRuleContexts(StateNameContext.class);
 		}
-		public DiseaseStateContext diseaseState(int i) {
-			return getRuleContext(DiseaseStateContext.class,i);
+		public StateNameContext stateName(int i) {
+			return getRuleContext(StateNameContext.class,i);
 		}
 		public ConditionContext condition() {
 			return getRuleContext(ConditionContext.class,0);
@@ -315,21 +385,21 @@ public class ACMulticapaParser extends Parser {
 
 	public final TransitionRuleContext transitionRule() throws RecognitionException {
 		TransitionRuleContext _localctx = new TransitionRuleContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_transitionRule);
+		enterRule(_localctx, 10, RULE_transitionRule);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(42);
-			match(T__11);
-			setState(43);
-			diseaseState();
-			setState(44);
+			setState(57);
 			match(T__12);
-			setState(45);
-			diseaseState();
-			setState(46);
+			setState(58);
+			stateName();
+			setState(59);
 			match(T__13);
-			setState(47);
+			setState(60);
+			stateName();
+			setState(61);
+			match(T__14);
+			setState(62);
 			condition();
 			}
 		}
@@ -344,9 +414,10 @@ public class ACMulticapaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ConditionContext extends ParserRuleContext {
-		public DiseaseStateContext diseaseState() {
-			return getRuleContext(DiseaseStateContext.class,0);
+		public StateNameContext stateName() {
+			return getRuleContext(StateNameContext.class,0);
 		}
 		public ConditionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -356,14 +427,14 @@ public class ACMulticapaParser extends Parser {
 
 	public final ConditionContext condition() throws RecognitionException {
 		ConditionContext _localctx = new ConditionContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_condition);
+		enterRule(_localctx, 12, RULE_condition);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(49);
-			match(T__14);
-			setState(50);
-			diseaseState();
+			setState(64);
+			match(T__15);
+			setState(65);
+			stateName();
 			}
 		}
 		catch (RecognitionException re) {
@@ -378,20 +449,46 @@ public class ACMulticapaParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\24\67\4\2\t\2\4\3"+
-		"\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\3\2\6\2\20\n\2\r\2\16\2\21\3\2\6"+
-		"\2\25\n\2\r\2\16\2\26\3\2\3\2\3\3\3\3\3\3\3\3\6\3\37\n\3\r\3\16\3 \3\3"+
-		"\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\7\3"+
-		"\7\3\7\3\7\2\2\b\2\4\6\b\n\f\2\3\3\2\t\r\2\63\2\17\3\2\2\2\4\32\3\2\2"+
-		"\2\6$\3\2\2\2\b*\3\2\2\2\n,\3\2\2\2\f\63\3\2\2\2\16\20\5\4\3\2\17\16\3"+
-		"\2\2\2\20\21\3\2\2\2\21\17\3\2\2\2\21\22\3\2\2\2\22\24\3\2\2\2\23\25\5"+
-		"\n\6\2\24\23\3\2\2\2\25\26\3\2\2\2\26\24\3\2\2\2\26\27\3\2\2\2\27\30\3"+
-		"\2\2\2\30\31\7\2\2\3\31\3\3\2\2\2\32\33\7\3\2\2\33\34\7\23\2\2\34\36\7"+
-		"\4\2\2\35\37\5\6\4\2\36\35\3\2\2\2\37 \3\2\2\2 \36\3\2\2\2 !\3\2\2\2!"+
-		"\"\3\2\2\2\"#\7\5\2\2#\5\3\2\2\2$%\7\6\2\2%&\7\23\2\2&\'\7\7\2\2\'(\5"+
-		"\b\5\2()\7\b\2\2)\7\3\2\2\2*+\t\2\2\2+\t\3\2\2\2,-\7\16\2\2-.\5\b\5\2"+
-		"./\7\17\2\2/\60\5\b\5\2\60\61\7\20\2\2\61\62\5\f\7\2\62\13\3\2\2\2\63"+
-		"\64\7\21\2\2\64\65\5\b\5\2\65\r\3\2\2\2\5\21\26 ";
+		"\u0004\u0001\u0013D\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
+		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0001\u0000\u0004\u0000\u0010"+
+		"\b\u0000\u000b\u0000\f\u0000\u0011\u0001\u0000\u0004\u0000\u0015\b\u0000"+
+		"\u000b\u0000\f\u0000\u0016\u0001\u0000\u0001\u0000\u0001\u0001\u0001\u0001"+
+		"\u0001\u0001\u0001\u0001\u0004\u0001\u001f\b\u0001\u000b\u0001\f\u0001"+
+		" \u0001\u0001\u0001\u0001\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002"+
+		"\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0005\u0002-\b\u0002"+
+		"\n\u0002\f\u00020\t\u0002\u0001\u0002\u0001\u0002\u0001\u0003\u0001\u0003"+
+		"\u0001\u0003\u0001\u0003\u0001\u0004\u0001\u0004\u0001\u0005\u0001\u0005"+
+		"\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0006"+
+		"\u0001\u0006\u0001\u0006\u0001\u0006\u0000\u0000\u0007\u0000\u0002\u0004"+
+		"\u0006\b\n\f\u0000\u0001\u0001\u0000\b\f@\u0000\u000f\u0001\u0000\u0000"+
+		"\u0000\u0002\u001a\u0001\u0000\u0000\u0000\u0004$\u0001\u0000\u0000\u0000"+
+		"\u00063\u0001\u0000\u0000\u0000\b7\u0001\u0000\u0000\u0000\n9\u0001\u0000"+
+		"\u0000\u0000\f@\u0001\u0000\u0000\u0000\u000e\u0010\u0003\u0002\u0001"+
+		"\u0000\u000f\u000e\u0001\u0000\u0000\u0000\u0010\u0011\u0001\u0000\u0000"+
+		"\u0000\u0011\u000f\u0001\u0000\u0000\u0000\u0011\u0012\u0001\u0000\u0000"+
+		"\u0000\u0012\u0014\u0001\u0000\u0000\u0000\u0013\u0015\u0003\n\u0005\u0000"+
+		"\u0014\u0013\u0001\u0000\u0000\u0000\u0015\u0016\u0001\u0000\u0000\u0000"+
+		"\u0016\u0014\u0001\u0000\u0000\u0000\u0016\u0017\u0001\u0000\u0000\u0000"+
+		"\u0017\u0018\u0001\u0000\u0000\u0000\u0018\u0019\u0005\u0000\u0000\u0001"+
+		"\u0019\u0001\u0001\u0000\u0000\u0000\u001a\u001b\u0005\u0001\u0000\u0000"+
+		"\u001b\u001c\u0005\u0012\u0000\u0000\u001c\u001e\u0005\u0002\u0000\u0000"+
+		"\u001d\u001f\u0003\u0004\u0002\u0000\u001e\u001d\u0001\u0000\u0000\u0000"+
+		"\u001f \u0001\u0000\u0000\u0000 \u001e\u0001\u0000\u0000\u0000 !\u0001"+
+		"\u0000\u0000\u0000!\"\u0001\u0000\u0000\u0000\"#\u0005\u0003\u0000\u0000"+
+		"#\u0003\u0001\u0000\u0000\u0000$%\u0005\u0004\u0000\u0000%&\u0005\u0012"+
+		"\u0000\u0000&\'\u0005\u0005\u0000\u0000\'(\u0005\u0012\u0000\u0000()\u0005"+
+		"\u0002\u0000\u0000).\u0003\u0006\u0003\u0000*+\u0005\u0006\u0000\u0000"+
+		"+-\u0003\u0006\u0003\u0000,*\u0001\u0000\u0000\u0000-0\u0001\u0000\u0000"+
+		"\u0000.,\u0001\u0000\u0000\u0000./\u0001\u0000\u0000\u0000/1\u0001\u0000"+
+		"\u0000\u00000.\u0001\u0000\u0000\u000012\u0005\u0003\u0000\u00002\u0005"+
+		"\u0001\u0000\u0000\u000034\u0003\b\u0004\u000045\u0005\u0007\u0000\u0000"+
+		"56\u0005\u0012\u0000\u00006\u0007\u0001\u0000\u0000\u000078\u0007\u0000"+
+		"\u0000\u00008\t\u0001\u0000\u0000\u00009:\u0005\r\u0000\u0000:;\u0003"+
+		"\b\u0004\u0000;<\u0005\u000e\u0000\u0000<=\u0003\b\u0004\u0000=>\u0005"+
+		"\u000f\u0000\u0000>?\u0003\f\u0006\u0000?\u000b\u0001\u0000\u0000\u0000"+
+		"@A\u0005\u0010\u0000\u0000AB\u0003\b\u0004\u0000B\r\u0001\u0000\u0000"+
+		"\u0000\u0004\u0011\u0016 .";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

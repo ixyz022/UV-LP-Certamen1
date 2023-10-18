@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def simulate_contagion(layer, rules, steps):
+def simulate_contagion01(layer, rules, steps):
     changes = 0
     while changes < steps:
         for x in range(layer.shape[0]):
