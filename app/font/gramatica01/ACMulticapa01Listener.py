@@ -17,6 +17,51 @@ class ACMulticapa01Listener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ACMulticapa01Parser#ignoredLines.
+    def enterIgnoredLines(self, ctx:ACMulticapa01Parser.IgnoredLinesContext):
+        pass
+
+    # Exit a parse tree produced by ACMulticapa01Parser#ignoredLines.
+    def exitIgnoredLines(self, ctx:ACMulticapa01Parser.IgnoredLinesContext):
+        pass
+
+
+    # Enter a parse tree produced by ACMulticapa01Parser#grammarChoice.
+    def enterGrammarChoice(self, ctx:ACMulticapa01Parser.GrammarChoiceContext):
+        pass
+
+    # Exit a parse tree produced by ACMulticapa01Parser#grammarChoice.
+    def exitGrammarChoice(self, ctx:ACMulticapa01Parser.GrammarChoiceContext):
+        pass
+
+
+    # Enter a parse tree produced by ACMulticapa01Parser#stepsChoice.
+    def enterStepsChoice(self, ctx:ACMulticapa01Parser.StepsChoiceContext):
+        pass
+
+    # Exit a parse tree produced by ACMulticapa01Parser#stepsChoice.
+    def exitStepsChoice(self, ctx:ACMulticapa01Parser.StepsChoiceContext):
+        pass
+
+
+    # Enter a parse tree produced by ACMulticapa01Parser#durationStandard.
+    def enterDurationStandard(self, ctx:ACMulticapa01Parser.DurationStandardContext):
+        pass
+
+    # Exit a parse tree produced by ACMulticapa01Parser#durationStandard.
+    def exitDurationStandard(self, ctx:ACMulticapa01Parser.DurationStandardContext):
+        pass
+
+
+    # Enter a parse tree produced by ACMulticapa01Parser#durationState.
+    def enterDurationState(self, ctx:ACMulticapa01Parser.DurationStateContext):
+        pass
+
+    # Exit a parse tree produced by ACMulticapa01Parser#durationState.
+    def exitDurationState(self, ctx:ACMulticapa01Parser.DurationStateContext):
+        pass
+
+
     # Enter a parse tree produced by ACMulticapa01Parser#layer.
     def enterLayer(self, ctx:ACMulticapa01Parser.LayerContext):
         pass
@@ -35,21 +80,57 @@ class ACMulticapa01Listener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ACMulticapa01Parser#diseaseState.
-    def enterDiseaseState(self, ctx:ACMulticapa01Parser.DiseaseStateContext):
+    # Enter a parse tree produced by ACMulticapa01Parser#basicState.
+    def enterBasicState(self, ctx:ACMulticapa01Parser.BasicStateContext):
         pass
 
-    # Exit a parse tree produced by ACMulticapa01Parser#diseaseState.
-    def exitDiseaseState(self, ctx:ACMulticapa01Parser.DiseaseStateContext):
+    # Exit a parse tree produced by ACMulticapa01Parser#basicState.
+    def exitBasicState(self, ctx:ACMulticapa01Parser.BasicStateContext):
         pass
 
 
-    # Enter a parse tree produced by ACMulticapa01Parser#transitionRule.
-    def enterTransitionRule(self, ctx:ACMulticapa01Parser.TransitionRuleContext):
+    # Enter a parse tree produced by ACMulticapa01Parser#transitions.
+    def enterTransitions(self, ctx:ACMulticapa01Parser.TransitionsContext):
         pass
 
-    # Exit a parse tree produced by ACMulticapa01Parser#transitionRule.
-    def exitTransitionRule(self, ctx:ACMulticapa01Parser.TransitionRuleContext):
+    # Exit a parse tree produced by ACMulticapa01Parser#transitions.
+    def exitTransitions(self, ctx:ACMulticapa01Parser.TransitionsContext):
+        pass
+
+
+    # Enter a parse tree produced by ACMulticapa01Parser#neighborTransitions.
+    def enterNeighborTransitions(self, ctx:ACMulticapa01Parser.NeighborTransitionsContext):
+        pass
+
+    # Exit a parse tree produced by ACMulticapa01Parser#neighborTransitions.
+    def exitNeighborTransitions(self, ctx:ACMulticapa01Parser.NeighborTransitionsContext):
+        pass
+
+
+    # Enter a parse tree produced by ACMulticapa01Parser#neighborTransitionRule.
+    def enterNeighborTransitionRule(self, ctx:ACMulticapa01Parser.NeighborTransitionRuleContext):
+        pass
+
+    # Exit a parse tree produced by ACMulticapa01Parser#neighborTransitionRule.
+    def exitNeighborTransitionRule(self, ctx:ACMulticapa01Parser.NeighborTransitionRuleContext):
+        pass
+
+
+    # Enter a parse tree produced by ACMulticapa01Parser#durationTransitions.
+    def enterDurationTransitions(self, ctx:ACMulticapa01Parser.DurationTransitionsContext):
+        pass
+
+    # Exit a parse tree produced by ACMulticapa01Parser#durationTransitions.
+    def exitDurationTransitions(self, ctx:ACMulticapa01Parser.DurationTransitionsContext):
+        pass
+
+
+    # Enter a parse tree produced by ACMulticapa01Parser#durationTransitionRule.
+    def enterDurationTransitionRule(self, ctx:ACMulticapa01Parser.DurationTransitionRuleContext):
+        pass
+
+    # Exit a parse tree produced by ACMulticapa01Parser#durationTransitionRule.
+    def exitDurationTransitionRule(self, ctx:ACMulticapa01Parser.DurationTransitionRuleContext):
         pass
 
 

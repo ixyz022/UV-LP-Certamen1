@@ -3,5 +3,8 @@
         "Certamen_I.pdf": true,
         "*/__pycache__": true,
         "venv": true
-    }
+    },
+    "python.analysis.extraPaths": [
+        "./app/font/gramatica01"
+    ]
 }

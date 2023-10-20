@@ -1,8 +1,9 @@
-# antlr4 -Dlanguage=Python3 ACMulticapa.g4 -visitor -listener
+# antlr4 -Dlanguage=Python3 ACMulticapa01.g4 -visitor -listener
 # antlr4 -visitor -no-listener -Dlanguage=Python3  ACMulticapa01.g4
 
 # Importaciones de bibliotecas estándar
 import os
+import argparse
 
 # Importaciones de bibliotecas de terceros
 from antlr4 import FileStream
@@ -27,55 +28,16 @@ from controllers.gramatica02Controllers.simulate_contagion02 import simulate_con
 # Importacion de gramatica 3 y controladores de la gramatica 3
 
 
-def obtener_archivos(dir_path):
-    data_dir_path = os.path.join(dir_path, 'data')
-    files = [f for f in os.listdir(data_dir_path) if os.path.isfile(
-        os.path.join(data_dir_path, f))]
-    files.sort()
-    return files, data_dir_path
+def obtener_opciones(file_path):
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
+        gramatica_opcion = int(lines[0].split(':')[1].strip())
+        num_steps = int(lines[1].split(':')[1].strip())
+    return gramatica_opcion, num_steps
 
 
-def imprimir_archivos(files):
-    for idx, filename in enumerate(files):
-        print(f"{idx + 1}: {filename}")
-
-
-def seleccionar_archivo(files):
-    file_number = int(
-        input("Por favor, ingresa el número del archivo que deseas leer: "))
-    if file_number < 1 or file_number > len(files):
-        print("Número inválido.")
-        return None
-    return files[file_number - 1]
-
-
-def seleccionar_pasos_simulacion():
-    num_steps = int(
-        input("Por favor, ingresa el número de pasos de simulación: "))
-    if num_steps < 1:
-        print("Número inválido.")
-        return None
-    return num_steps
-
-
-def seleccionar_gramatica():
-    print("Por favor, selecciona una gramática:")
-    print("1: ACMulticapa normal")
-    print("2: ACMulticapa poblacional")
-    print("3: ACMulticapa03")
-    print("4: ACMulticapa04")
-
-    opcion = int(
-        input("Ingresa el número de la gramática que deseas utilizar: "))
-
-    if opcion < 1 or opcion > 4:
-        print("Número inválido.")
-        return None
-
-    return opcion
-
-
-def realizar_simulacion(file_path, num_steps, gramatica_opcion):
+def realizar_simulacion(file_path):
+    gramatica_opcion, num_steps = obtener_opciones(file_path)
     input_stream = FileStream(file_path)
 
     if gramatica_opcion == 1:
@@ -85,8 +47,9 @@ def realizar_simulacion(file_path, num_steps, gramatica_opcion):
         tree = parser.program()
         visitor = ACMulticapa01Interpreter()
         visitor.visit(tree)
-        print(visitor.tensor, visitor.rules)
-        simulate_contagion01(visitor.tensor, visitor.rules, num_steps)
+        print(visitor.state_durations, "\n", visitor.tensor, "\n",
+              visitor.duration_transitions, "\n", visitor.neighbor_transitions)
+        result = simulate_contagion01(visitor.tensor)
 
     elif gramatica_opcion == 2:
         lexer = ACMulticapa02Lexer(input_stream)
@@ -96,7 +59,8 @@ def realizar_simulacion(file_path, num_steps, gramatica_opcion):
         visitor = ACMulticapa02Interpreter()
         visitor.visit(tree)
         print("Entrada: \n", visitor.tensor, "\n", visitor.rules)
-        simulate_contagion02(visitor.tensor, num_steps)
+
+        # simulate_contagion02(visitor.tensor, num_steps)
     # elif gramatica_opcion == 3:
     #     lexer = ACMulticapa03Lexer(input_stream)
     #     parser = ACMulticapa03Parser(CommonTokenStream(lexer))
@@ -107,37 +71,14 @@ def realizar_simulacion(file_path, num_steps, gramatica_opcion):
     #     visitor = ACMulticapa04Interpreter()
 
 
-def main():
-    while True:
-        try:
+# cd app
+# python main.py "D:/Documentos/Development Projects/UV-LP-Certamen1/app/data/escenario1.txt"
 
-            gramatica_opcion = seleccionar_gramatica()
-            if gramatica_opcion is None:
-                continue
+parser = argparse.ArgumentParser(description='Procesar archivo especificado.')
+parser.add_argument('file_path', type=str,
+                    help='La ruta del archivo a procesar.')
 
-            dir_path = os.path.dirname(os.path.realpath(__file__))
-            files, data_dir_path = obtener_archivos(dir_path)
-            imprimir_archivos(files)
+args = parser.parse_args()
+print(args.file_path)
 
-            selected_file = seleccionar_archivo(files)
-            if selected_file is None:
-                continue
-
-            file_path = os.path.join(data_dir_path, selected_file)
-
-            num_steps = seleccionar_pasos_simulacion()
-            if num_steps is None:
-                continue
-
-            realizar_simulacion(file_path, num_steps, gramatica_opcion)
-
-            break
-
-        except FileNotFoundError:
-            print("El directorio o archivo no existe.")
-        except Exception as e:
-            print(f"Ocurrió un error: {e}")
-
-
-if __name__ == '__main__':
-    main()
+realizar_simulacion(args.file_path)

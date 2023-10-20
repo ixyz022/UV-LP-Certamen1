@@ -1,38 +1,50 @@
 grammar ACMulticapa01;
 
 // Puntos de entrada
-program: layer+ transitionRule+ EOF;
+program:
+	ignoredLines? // Esta línea es nueva
+	durationStandard? layer+ transitions* EOF;
+
+// Líneas ignoradas
+ignoredLines: grammarChoice stepsChoice; // Esta línea es nueva
+
+// Elección de gramática y pasos
+grammarChoice: 'GRAMATICA:' NUMBER;
+stepsChoice: 'PASOS:' NUMBER;
+
+// Duración estándar de los estados
+durationStandard: 'DURACION ESTADOS' '{' durationState+ '}';
+
+durationState: basicState NUMBER;
 
 // Definiciones
 layer: 'CAPA' NUMBER '{' cell+ '}';
-// layer: representa una vecindad con sus celdas
-cell: 'CELDA' NUMBER '(' diseaseState ')';
-// cell: permite crear celdas con un estado de enfermedad
+cell: 'CELDA' NUMBER '(' basicState ')';
 
-diseaseState:
+basicState:
 	'SUSCEPTIBLE'
-	| 'EXPUESTO' // Modelo SEIRD
+	| 'EXPUESTO'
 	| 'INFECTADO'
 	| 'RECUPERADO'
-	| 'MUERTO'; // Modelo SIRD
-// diseaseState: estados de la enfermedad
-
-transitionRule:
-	'REGLA' diseaseState '->' diseaseState 'SI' condition;
-// transitionRule: reglas de transición entre estados de la enfermedad 
-
-condition: 'VECINOS' transitionDiseaseState;
-// condition: condición bajo la cual ocurre una transición basada en la vecindad
-
-transitionDiseaseState:
-	'SUSCEPTIBLE'
-	| 'EXPUESTO' step
-	| 'INFECTADO' step
-	| 'RECUPERADO' step
 	| 'MUERTO';
-// diseaseState: estados de la enfermedad
 
-step: 'DURANTE' NUMBER 'PASOS';
+// Transiciones
+transitions: neighborTransitions | durationTransitions;
+
+// Transiciones por vecinos
+neighborTransitions:
+	'TRANSICIONES POR VECINOS' '{' neighborTransitionRule+ '}';
+
+neighborTransitionRule:
+	'REGLA' basicState '->' basicState 'SI' condition;
+
+// Transiciones por duración
+durationTransitions:
+	'TRANSICIONES POR DURACION' '{' durationTransitionRule+ '}';
+
+durationTransitionRule: basicState '->' basicState;
+
+condition: 'HAY' NUMBER 'VECINOS' basicState;
 
 // Tokens
 STRING:

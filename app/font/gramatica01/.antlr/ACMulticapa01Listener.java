@@ -1,4 +1,4 @@
-// Generated from c:/Users/ixyz0/Personal/Dev/UV-LP-Certamen1/app/font/gramatica01/ACMulticapa01.g4 by ANTLR 4.13.1
+// Generated from d:/Documentos/Development Projects/UV-LP-Certamen1/app/font/gramatica01/ACMulticapa01.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -16,6 +16,26 @@ public interface ACMulticapa01Listener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitProgram(ACMulticapa01Parser.ProgramContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ACMulticapa01Parser#durationStandard}.
+	 * @param ctx the parse tree
+	 */
+	void enterDurationStandard(ACMulticapa01Parser.DurationStandardContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ACMulticapa01Parser#durationStandard}.
+	 * @param ctx the parse tree
+	 */
+	void exitDurationStandard(ACMulticapa01Parser.DurationStandardContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ACMulticapa01Parser#durationState}.
+	 * @param ctx the parse tree
+	 */
+	void enterDurationState(ACMulticapa01Parser.DurationStateContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ACMulticapa01Parser#durationState}.
+	 * @param ctx the parse tree
+	 */
+	void exitDurationState(ACMulticapa01Parser.DurationStateContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ACMulticapa01Parser#layer}.
 	 * @param ctx the parse tree
@@ -37,25 +57,55 @@ public interface ACMulticapa01Listener extends ParseTreeListener {
 	 */
 	void exitCell(ACMulticapa01Parser.CellContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ACMulticapa01Parser#diseaseState}.
+	 * Enter a parse tree produced by {@link ACMulticapa01Parser#basicState}.
 	 * @param ctx the parse tree
 	 */
-	void enterDiseaseState(ACMulticapa01Parser.DiseaseStateContext ctx);
+	void enterBasicState(ACMulticapa01Parser.BasicStateContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ACMulticapa01Parser#diseaseState}.
+	 * Exit a parse tree produced by {@link ACMulticapa01Parser#basicState}.
 	 * @param ctx the parse tree
 	 */
-	void exitDiseaseState(ACMulticapa01Parser.DiseaseStateContext ctx);
+	void exitBasicState(ACMulticapa01Parser.BasicStateContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ACMulticapa01Parser#transitionRule}.
+	 * Enter a parse tree produced by {@link ACMulticapa01Parser#neighborTransitions}.
 	 * @param ctx the parse tree
 	 */
-	void enterTransitionRule(ACMulticapa01Parser.TransitionRuleContext ctx);
+	void enterNeighborTransitions(ACMulticapa01Parser.NeighborTransitionsContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ACMulticapa01Parser#transitionRule}.
+	 * Exit a parse tree produced by {@link ACMulticapa01Parser#neighborTransitions}.
 	 * @param ctx the parse tree
 	 */
-	void exitTransitionRule(ACMulticapa01Parser.TransitionRuleContext ctx);
+	void exitNeighborTransitions(ACMulticapa01Parser.NeighborTransitionsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ACMulticapa01Parser#neighborTransitionRule}.
+	 * @param ctx the parse tree
+	 */
+	void enterNeighborTransitionRule(ACMulticapa01Parser.NeighborTransitionRuleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ACMulticapa01Parser#neighborTransitionRule}.
+	 * @param ctx the parse tree
+	 */
+	void exitNeighborTransitionRule(ACMulticapa01Parser.NeighborTransitionRuleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ACMulticapa01Parser#durationTransitions}.
+	 * @param ctx the parse tree
+	 */
+	void enterDurationTransitions(ACMulticapa01Parser.DurationTransitionsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ACMulticapa01Parser#durationTransitions}.
+	 * @param ctx the parse tree
+	 */
+	void exitDurationTransitions(ACMulticapa01Parser.DurationTransitionsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ACMulticapa01Parser#durationTransitionRule}.
+	 * @param ctx the parse tree
+	 */
+	void enterDurationTransitionRule(ACMulticapa01Parser.DurationTransitionRuleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ACMulticapa01Parser#durationTransitionRule}.
+	 * @param ctx the parse tree
+	 */
+	void exitDurationTransitionRule(ACMulticapa01Parser.DurationTransitionRuleContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ACMulticapa01Parser#condition}.
 	 * @param ctx the parse tree
@@ -66,24 +116,4 @@ public interface ACMulticapa01Listener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCondition(ACMulticapa01Parser.ConditionContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ACMulticapa01Parser#transitionDiseaseState}.
-	 * @param ctx the parse tree
-	 */
-	void enterTransitionDiseaseState(ACMulticapa01Parser.TransitionDiseaseStateContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ACMulticapa01Parser#transitionDiseaseState}.
-	 * @param ctx the parse tree
-	 */
-	void exitTransitionDiseaseState(ACMulticapa01Parser.TransitionDiseaseStateContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ACMulticapa01Parser#step}.
-	 * @param ctx the parse tree
-	 */
-	void enterStep(ACMulticapa01Parser.StepContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ACMulticapa01Parser#step}.
-	 * @param ctx the parse tree
-	 */
-	void exitStep(ACMulticapa01Parser.StepContext ctx);
 }

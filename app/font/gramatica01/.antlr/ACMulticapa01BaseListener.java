@@ -1,4 +1,4 @@
-// Generated from c:/Users/ixyz0/Personal/Dev/UV-LP-Certamen1/app/font/gramatica01/ACMulticapa01.g4 by ANTLR 4.13.1
+// Generated from d:/Documentos/Development Projects/UV-LP-Certamen1/app/font/gramatica01/ACMulticapa01.g4 by ANTLR 4.13.1
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -28,6 +28,30 @@ public class ACMulticapa01BaseListener implements ACMulticapa01Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDurationStandard(ACMulticapa01Parser.DurationStandardContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDurationStandard(ACMulticapa01Parser.DurationStandardContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDurationState(ACMulticapa01Parser.DurationStateContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDurationState(ACMulticapa01Parser.DurationStateContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterLayer(ACMulticapa01Parser.LayerContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -52,25 +76,61 @@ public class ACMulticapa01BaseListener implements ACMulticapa01Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDiseaseState(ACMulticapa01Parser.DiseaseStateContext ctx) { }
+	@Override public void enterBasicState(ACMulticapa01Parser.BasicStateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDiseaseState(ACMulticapa01Parser.DiseaseStateContext ctx) { }
+	@Override public void exitBasicState(ACMulticapa01Parser.BasicStateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTransitionRule(ACMulticapa01Parser.TransitionRuleContext ctx) { }
+	@Override public void enterNeighborTransitions(ACMulticapa01Parser.NeighborTransitionsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTransitionRule(ACMulticapa01Parser.TransitionRuleContext ctx) { }
+	@Override public void exitNeighborTransitions(ACMulticapa01Parser.NeighborTransitionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNeighborTransitionRule(ACMulticapa01Parser.NeighborTransitionRuleContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNeighborTransitionRule(ACMulticapa01Parser.NeighborTransitionRuleContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDurationTransitions(ACMulticapa01Parser.DurationTransitionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDurationTransitions(ACMulticapa01Parser.DurationTransitionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDurationTransitionRule(ACMulticapa01Parser.DurationTransitionRuleContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDurationTransitionRule(ACMulticapa01Parser.DurationTransitionRuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -83,30 +143,6 @@ public class ACMulticapa01BaseListener implements ACMulticapa01Listener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCondition(ACMulticapa01Parser.ConditionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterTransitionDiseaseState(ACMulticapa01Parser.TransitionDiseaseStateContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTransitionDiseaseState(ACMulticapa01Parser.TransitionDiseaseStateContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterStep(ACMulticapa01Parser.StepContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitStep(ACMulticapa01Parser.StepContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
