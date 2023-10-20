@@ -20,9 +20,11 @@ stateName:
 	| 'RECUPERADO'
 	| 'MUERTO';
 
-transitionRule: 'REGLA' stateName '->' stateName 'SI' condition;
+transitionRule:
+	'REGLA' stateName '->' stateName 'SI' condition 'CADA' step;
 
 condition: 'VECINOS' stateName;
+step: NUMBER;
 
 // Tokens
 STRING: [a-zA-Z_][a-zA-Z_0-9]*;

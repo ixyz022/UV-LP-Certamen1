@@ -85,6 +85,7 @@ def realizar_simulacion(file_path, num_steps, gramatica_opcion):
         tree = parser.program()
         visitor = ACMulticapa01Interpreter()
         visitor.visit(tree)
+        print(visitor.tensor, visitor.rules)
         simulate_contagion01(visitor.tensor, visitor.rules, num_steps)
 
     elif gramatica_opcion == 2:
@@ -94,7 +95,7 @@ def realizar_simulacion(file_path, num_steps, gramatica_opcion):
         tree = parser.program()
         visitor = ACMulticapa02Interpreter()
         visitor.visit(tree)
-        # print(visitor.tensor, visitor.rules)
+        print("Entrada: \n", visitor.tensor, "\n", visitor.rules)
         simulate_contagion02(visitor.tensor, num_steps)
     # elif gramatica_opcion == 3:
     #     lexer = ACMulticapa03Lexer(input_stream)

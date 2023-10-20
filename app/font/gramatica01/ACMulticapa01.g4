@@ -11,7 +11,7 @@ cell: 'CELDA' NUMBER '(' diseaseState ')';
 
 diseaseState:
 	'SUSCEPTIBLE'
-	| 'EXPOSED' // Modelo SEIRD
+	| 'EXPUESTO' // Modelo SEIRD
 	| 'INFECTADO'
 	| 'RECUPERADO'
 	| 'MUERTO'; // Modelo SIRD
@@ -21,8 +21,18 @@ transitionRule:
 	'REGLA' diseaseState '->' diseaseState 'SI' condition;
 // transitionRule: reglas de transición entre estados de la enfermedad 
 
-condition: 'VECINOS' diseaseState;
+condition: 'VECINOS' transitionDiseaseState;
 // condition: condición bajo la cual ocurre una transición basada en la vecindad
+
+transitionDiseaseState:
+	'SUSCEPTIBLE'
+	| 'EXPUESTO' step
+	| 'INFECTADO' step
+	| 'RECUPERADO' step
+	| 'MUERTO';
+// diseaseState: estados de la enfermedad
+
+step: 'DURANTE' NUMBER 'PASOS';
 
 // Tokens
 STRING:

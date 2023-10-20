@@ -51,13 +51,16 @@ def ejecutar_paso(coord, matriz):
 
 
 def simulate_contagion02(matriz, num_steps):
-    contador = 0
-    total_celdas = matriz.shape[0] * matriz.shape[1] * matriz.shape[2]
-    while contador < num_steps * total_celdas:  # Ajuste en la condición del bucle
+    contador = 1
+    print(matriz.shape[2])
+    while contador <= num_steps:
         for x in range(matriz.shape[0]):
             for y in range(matriz.shape[1]):
                 for z in range(matriz.shape[2]):
-                    ejecutar_paso((x, y, z), matriz)
+
                     # Imprimir el estado de la matriz después de cada pasoprimir el estado de la matriz después de cada paso
-                    print(matriz, "\n")
-                    contador += 1
+
+                    print(x, y, z)
+                    print(matriz[x, y, z])
+                    ejecutar_paso((x, y, z), matriz)
+        contador += 1
