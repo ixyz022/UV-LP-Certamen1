@@ -76,14 +76,14 @@ def simulate_contagion02(matrix, duration_structure, prob_transitions, cell_tran
     # print_prob_transitions(prob_transitions)
     # print_cell_transitions(cell_transitions)
 
-    # printNormal(matrix, duration_structure, prob_transitions, cell_transitions)
+    printNormal(matrix, duration_structure, prob_transitions, cell_transitions)
 
     vecindades = obtener_vecindades(matrix)
     # imprimir_vecindades(vecindades)
 
-    for i in range(num_steps):
-        actualizar_vecindad(matrix, duration_structure, prob_transitions)
-        print_matrix_3d(matrix)
+    # for i in range(num_steps):
+    #     actualizar_vecindad(matrix, duration_structure, prob_transitions)
+    #     print_matrix_3d(matrix)
 
 
 def obtener_vecinos(x, y, z, matriz):
@@ -173,3 +173,29 @@ def get_closest_transition(state, random_value, transitions_dict):
             closest_transition = transition
             closest_difference = probability_difference
     return closest_transition["to"] if closest_transition else None
+
+
+def mover_poblacion_entre_estados(celda):
+    # Obtener la lista de estados en la celda
+    estados = list(celda['states'].keys())
+    if len(estados) < 2:
+        # No se pueden realizar movimientos si hay menos de 2 estados
+        return celda
+
+    # Elegir un estado aleatoriamente como origen
+    estado_origen = random.choice(estados)
+    # Elegir otro estado aleatoriamente como destino
+    estado_destino = random.choice(estados)
+
+    if estado_origen != estado_destino:
+        # Solo mover población si el estado de origen y destino son diferentes
+        poblacion_mover = random.randint(
+            1, celda['states'][estado_origen]['population'])
+        celda['states'][estado_origen]['population'] -= poblacion_mover
+        if estado_destino in celda['states']:
+            celda['states'][estado_destino]['population'] += poblacion_mover
+        else:
+            celda['states'][estado_destino] = {
+                'population': poblacion_mover, 'counter': 0}
+
+    return celda
