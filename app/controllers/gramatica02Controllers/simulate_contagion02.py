@@ -3,13 +3,15 @@ import random
 
 
 def print_matrix_3d(matrix_3d):
-    for layer_index, layer in enumerate(matrix_3d, start=1):
+    for layer_index, layer in enumerate(matrix_3d):
         print(f"Capa {layer_index}:")
-        for row_index, cell in enumerate(layer, start=1):
-            cell_str = ', '.join(
-                f'{state}: {info}' for state, info in cell['states'].items())
-            blocked_str = "Bloqueada" if cell['BLOQUEADO'] else "No Bloqueada"
-            print(f"    Celda {row_index} ({blocked_str}): {cell_str}")
+        for row_index, row in enumerate(layer):
+            for col_index, cell in enumerate(row):
+                cell_str = ', '.join(
+                    f'{state}: {info}' for state, info in cell['states'].items())
+                blocked_str = "Bloqueada" if cell['BLOQUEADO'] else "No Bloqueada"
+                print(
+                    f"    Celda ({layer_index}, {row_index}, {col_index}) ({blocked_str}): {cell_str}")
         print()  # Imprime una línea en blanco entre capas
 
 
@@ -53,8 +55,121 @@ def print_cell_transitions(cell_transitions):
                 f"        {index}. Hacia: {to_state}, Condición: {condition_state} {operator} {number}")
 
 
-def simulate_contagion02(matrix, duration_structure, prob_transitions, cell_transitions):
+def imprimir_vecindades(vecindades):
+    for i, vecindad in enumerate(vecindades):
+        print(f'Vecindad {i + 1}:')
+        for clave, valor in vecindad.items():
+            print(f'  {clave}: {valor}')
+        print('-' * 40)  # Imprime una línea horizontal como separador
+
+
+def printNormal(matrix, duration_structure, prob_transitions, cell_transitions):
+    print(matrix)
+    print(duration_structure)
+    print(prob_transitions)
+    print(cell_transitions)
+
+
+def simulate_contagion02(matrix, duration_structure, prob_transitions, cell_transitions, num_steps):
     print_matrix_3d(matrix)
-    print_duration_structure(duration_structure)
-    print_prob_transitions(prob_transitions)
-    print_cell_transitions(cell_transitions)
+    # print_duration_structure(duration_structure)
+    # print_prob_transitions(prob_transitions)
+    # print_cell_transitions(cell_transitions)
+
+    # printNormal(matrix, duration_structure, prob_transitions, cell_transitions)
+
+    vecindades = obtener_vecindades(matrix)
+    # imprimir_vecindades(vecindades)
+
+    for i in range(num_steps):
+        actualizar_vecindad(matrix, duration_structure, prob_transitions)
+        print_matrix_3d(matrix)
+
+
+def obtener_vecinos(x, y, z, matriz):
+    vecinos = []
+    nx, ny, nz = len(matriz), len(matriz[0]), len(matriz[0][0])
+
+    for dx in [-1, 0, 1]:
+        for dy in [-1, 0, 1]:
+            for dz in [-1, 0, 1]:
+                if dx == dy == dz == 0:
+                    continue
+                nx_coord, ny_coord, nz_coord = x + dx, y + dy, z + dz
+                if 0 <= nx_coord < nx and 0 <= ny_coord < ny and 0 <= nz_coord < nz:
+                    vecinos.append((nx_coord, ny_coord, nz_coord))
+    return vecinos
+
+
+def obtener_vecindades(matriz):
+    vecindades = []
+    nx, ny, nz = len(matriz), len(matriz[0]), len(matriz[0][0])
+    for i in range(nx):
+        for j in range(ny):
+            for k in range(nz):
+                celda_info = {
+                    'capa': i,
+                    'identificador': (i, j, k),
+                    'vecinos': obtener_vecinos(i, j, k, matriz)
+                }
+                vecindades.append(celda_info)
+    return vecindades
+
+
+def actualizar_vecindad(matriz, duration_transitions, prob_transitions):
+    D1, D2, D3 = len(matriz), len(matriz[0]), len(matriz[0][0])
+    for i in range(D1):
+        for j in range(D2):
+            for k in range(D3):
+                for estado in matriz[i][j][k]["states"]:
+                    matriz[i][j][k]["states"][estado]["counter"] += 1
+                    matriz[i][j][k] = transicionar_estado(
+                        duration_transitions, matriz[i][j][k], prob_transitions)
+
+
+def transicionar_estado(duration_transitions, celda, prob_transitions):
+    new_states = {}  # Crear un nuevo diccionario para almacenar los estados actualizados
+    for estado, info in celda['states'].items():
+        contador_actual = info['counter']
+        # Comprobar si el contador actual coincide con alguna duración en duration_transitions
+        duration_match = next(
+            (item for item in duration_transitions if item['state'] == estado and item['duration'] == contador_actual), None)
+        if duration_match:
+            valor_aleatorio = random.random()
+            resultado_transicion = get_closest_transition(
+                estado, valor_aleatorio, prob_transitions
+            )
+            # print(celda, resultado_transicion, estado)
+            if resultado_transicion and resultado_transicion != estado:
+                # Si hay una transición y el estado resultante es diferente, actualizar la entrada
+                info['counter'] = 0  # Restablecer el contador
+                if resultado_transicion in new_states:
+                    # Si el estado resultante ya existe en new_states, suma la población
+                    new_states[resultado_transicion]["population"] += info["population"]
+                else:
+                    # Si el estado resultante no existe en new_states, créalo
+                    new_states[resultado_transicion] = info.copy()
+            else:
+                # Mantener el estado actual si no hay transición
+                new_states[estado] = info
+        else:
+            # Mantener el estado actual si no hay coincidencia de duración
+            new_states[estado] = info
+    # Reemplazar los estados antiguos con los nuevos estados
+    # print("NUEVA", new_states)
+    # print(celda)
+    celda['states'] = new_states
+
+    return celda
+
+
+def get_closest_transition(state, random_value, transitions_dict):
+    closest_transition = None
+    closest_difference = float('inf')
+    for transition in transitions_dict.get(state, []):
+        probability_difference = abs(transition['probability'] - random_value)
+        if probability_difference < closest_difference or \
+           (probability_difference == closest_difference and transition['probability'] < random_value):
+            closest_transition = transition
+            closest_difference = probability_difference
+    return closest_transition["to"] if closest_transition else None

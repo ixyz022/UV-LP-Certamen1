@@ -6,12 +6,18 @@ from font.gramatica02.ACMulticapa02Parser import ACMulticapa02Parser
 class ACMulticapa02Interpreter(ACMulticapa02Visitor):
 
     def __init__(self):
-        self.matrix_3d = []
+        self.matrix_3d = None
+        self.num_layers = 0
+        self.current_layer_index = 0
         self.duration_structure = []
         self.prob_transitions = {}
         self.cell_transitions = {}
 
     def visitProgram(self, ctx: ACMulticapa02Parser.ProgramContext):
+        self.num_layers = len(ctx.layer())
+        num_cells = len(ctx.layer(0).cell())
+        dim = int(np.sqrt(num_cells))
+        self.matrix_3d = np.empty((self.num_layers, dim, dim), dtype=object)
         # Si hay definiciones de duración estándar, visita esa sección
         if ctx.durationStandard():
             self.visitDurationStandard(ctx.durationStandard())
@@ -29,19 +35,11 @@ class ACMulticapa02Interpreter(ACMulticapa02Visitor):
                 self.visitCellTransitions(transitions_ctx.cellTransitions())
 
     def visitLayer(self, ctx: ACMulticapa02Parser.LayerContext):
-        # Inicializa una nueva capa como una lista vacía.
-        current_layer = []
-
-        # Itera sobre cada definición de celda en la capa actual.
-        for cell_ctx in ctx.cell():
-            # Llama al método visitCell para construir la estructura de datos de la celda.
+        for index, cell_ctx in enumerate(ctx.cell()):
+            row, col = divmod(index, self.matrix_3d.shape[1])
             cell_data = self.visitCell(cell_ctx)
-
-            # Añade la estructura de datos de la celda a la capa actual.
-            current_layer.append(cell_data)
-
-        # Añade la capa actual a la matriz 3D.
-        self.matrix_3d.append(current_layer)
+            self.matrix_3d[self.current_layer_index, row, col] = cell_data
+        self.current_layer_index += 1  # Incrementa el índice de la capa actual
 
     def visitDurationStandard(self, ctx: ACMulticapa02Parser.DurationStandardContext):
         # Itera sobre cada definición de duración de estado en la sección de duración estándar.

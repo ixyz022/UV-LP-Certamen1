@@ -63,7 +63,7 @@ def realizar_simulacion(file_path):
         visitor = ACMulticapa02Interpreter()
         visitor.visit(tree)
         simulate_contagion02(
-            visitor.matrix_3d, visitor.duration_structure, visitor.prob_transitions, visitor.cell_transitions)
+            visitor.matrix_3d, visitor.duration_structure, visitor.prob_transitions, visitor.cell_transitions, num_steps)
 
 
 # cd app
