@@ -14,6 +14,31 @@ class ACMulticapa02Visitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by ACMulticapa02Parser#ignoredLines.
+    def visitIgnoredLines(self, ctx:ACMulticapa02Parser.IgnoredLinesContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ACMulticapa02Parser#grammarChoice.
+    def visitGrammarChoice(self, ctx:ACMulticapa02Parser.GrammarChoiceContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ACMulticapa02Parser#stepsChoice.
+    def visitStepsChoice(self, ctx:ACMulticapa02Parser.StepsChoiceContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ACMulticapa02Parser#durationStandard.
+    def visitDurationStandard(self, ctx:ACMulticapa02Parser.DurationStandardContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ACMulticapa02Parser#durationState.
+    def visitDurationState(self, ctx:ACMulticapa02Parser.DurationStateContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by ACMulticapa02Parser#layer.
     def visitLayer(self, ctx:ACMulticapa02Parser.LayerContext):
         return self.visitChildren(ctx)
@@ -24,23 +49,53 @@ class ACMulticapa02Visitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by ACMulticapa02Parser#diseaseStateSet.
+    def visitDiseaseStateSet(self, ctx:ACMulticapa02Parser.DiseaseStateSetContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by ACMulticapa02Parser#diseaseState.
     def visitDiseaseState(self, ctx:ACMulticapa02Parser.DiseaseStateContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by ACMulticapa02Parser#stateName.
-    def visitStateName(self, ctx:ACMulticapa02Parser.StateNameContext):
+    # Visit a parse tree produced by ACMulticapa02Parser#basicState.
+    def visitBasicState(self, ctx:ACMulticapa02Parser.BasicStateContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by ACMulticapa02Parser#transitionRule.
-    def visitTransitionRule(self, ctx:ACMulticapa02Parser.TransitionRuleContext):
+    # Visit a parse tree produced by ACMulticapa02Parser#transitions.
+    def visitTransitions(self, ctx:ACMulticapa02Parser.TransitionsContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ACMulticapa02Parser#durationTransitions.
+    def visitDurationTransitions(self, ctx:ACMulticapa02Parser.DurationTransitionsContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ACMulticapa02Parser#durationTransitionRule.
+    def visitDurationTransitionRule(self, ctx:ACMulticapa02Parser.DurationTransitionRuleContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ACMulticapa02Parser#cellTransitions.
+    def visitCellTransitions(self, ctx:ACMulticapa02Parser.CellTransitionsContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ACMulticapa02Parser#cellTransitionRule.
+    def visitCellTransitionRule(self, ctx:ACMulticapa02Parser.CellTransitionRuleContext):
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by ACMulticapa02Parser#condition.
     def visitCondition(self, ctx:ACMulticapa02Parser.ConditionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ACMulticapa02Parser#comparison.
+    def visitComparison(self, ctx:ACMulticapa02Parser.ComparisonContext):
         return self.visitChildren(ctx)
 
 

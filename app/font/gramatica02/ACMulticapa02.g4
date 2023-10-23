@@ -1,32 +1,59 @@
 grammar ACMulticapa02;
 
 // Puntos de entrada
-program: layer+ transitionRule+ EOF;
+program:
+	ignoredLines? durationStandard? layer+ transitions* EOF;
+
+// Líneas ignoradas
+ignoredLines: grammarChoice stepsChoice;
+
+// Elección de gramática y pasos
+grammarChoice: 'GRAMATICA:' NUMBER;
+stepsChoice: 'PASOS:' NUMBER;
+
+// Duración estándar de los estados
+durationStandard: 'DURACION ESTADOS' '{' durationState+ '}';
+
+durationState: basicState NUMBER;
 
 // Definiciones
 layer: 'CAPA' NUMBER '{' cell+ '}';
-cell:
-	'CELDA' NUMBER 'POBLACION' NUMBER '{' diseaseState (
-		',' diseaseState
-	)* '}';
+cell: 'CELDA' NUMBER diseaseStateSet ('BLOQUEADO')?;
 
-diseaseState: stateName ':' NUMBER;
-// stateName: representa el estado de la enfermedad NUMBER: representa la cantidad de individuos en
+diseaseStateSet: '{' diseaseState ( ',' diseaseState)* '}';
 
-stateName:
+diseaseState: basicState ':' NUMBER;
+
+basicState:
 	'SUSCEPTIBLE'
-	| 'EXPOSED'
+	| 'EXPUESTO'
 	| 'INFECTADO'
 	| 'RECUPERADO'
 	| 'MUERTO';
 
-transitionRule:
-	'REGLA' stateName '->' stateName 'SI' condition 'CADA' step;
+// Transiciones
+transitions: durationTransitions | cellTransitions;
 
-condition: 'VECINOS' stateName;
-step: NUMBER;
+// Transiciones por duración
+durationTransitions:
+	'TRANSICIONES POR DURACION' '{' durationTransitionRule+ '}';
+
+durationTransitionRule:
+	basicState '->' basicState 'PROBABILIDAD' NUMBER;
+
+// Transiciones por celda
+cellTransitions:
+	'TRANSICIONES POR CELDA' '{' cellTransitionRule+ '}';
+
+cellTransitionRule:
+	'REGLA' basicState '->' basicState 'SI' 'HAY' condition;
+
+condition: basicState comparison;
+
+comparison: OPERATOR NUMBER;
 
 // Tokens
 STRING: [a-zA-Z_][a-zA-Z_0-9]*;
 NUMBER: [0-9]+ ('.' [0-9]*)?;
 WS: [ \t\r\n]+ -> skip;
+OPERATOR: '>' | '<' | '>=' | '<=' | '==';

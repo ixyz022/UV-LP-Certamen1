@@ -1,5 +1,5 @@
-# antlr4 -Dlanguage=Python3 ACMulticapa01.g4 -visitor -listener
-# antlr4 -visitor -no-listener -Dlanguage=Python3  ACMulticapa01.g4
+# antlr4 -Dlanguage=Python3 ACMulticapa02.g4 -visitor -listener
+# antlr4 -visitor -no-listener -Dlanguage=Python3  ACMulticapa02.g4
 
 # Importaciones de bibliotecas estándar
 import os
@@ -40,18 +40,21 @@ def realizar_simulacion(file_path):
     gramatica_opcion, num_steps = obtener_opciones(file_path)
     input_stream = FileStream(file_path)
 
+    # python main.py "D:/Documentos/Development Projects/UV-LP-Certamen1/app/data/escenario1.txt"
     if gramatica_opcion == 1:
+
         lexer = ACMulticapa01Lexer(input_stream)
         token_stream = CommonTokenStream(lexer)
         parser = ACMulticapa01Parser(token_stream)
         tree = parser.program()
         visitor = ACMulticapa01Interpreter()
         visitor.visit(tree)
-        # print(visitor.state_durations, "\n", visitor.tensor, "\n",
-        #     visitor.duration_transitions, "\n", visitor.neighbor_transitions)
+        print(visitor.state_durations, "\n", visitor.tensor, "\n",
+              visitor.duration_transitions, "\n", visitor.neighbor_transitions)
         result = simulate_contagion01(
             visitor.tensor, visitor.duration_transitions, visitor.state_durations,  visitor.neighbor_transitions, num_steps)
 
+    # python main.py "D:/Documentos/Development Projects/UV-LP-Certamen1/app/data/escenario2.txt"
     elif gramatica_opcion == 2:
         lexer = ACMulticapa02Lexer(input_stream)
         token_stream = CommonTokenStream(lexer)
@@ -59,22 +62,11 @@ def realizar_simulacion(file_path):
         tree = parser.program()
         visitor = ACMulticapa02Interpreter()
         visitor.visit(tree)
-        print("Entrada: \n", visitor.tensor, "\n", visitor.rules)
-
-        # simulate_contagion02(visitor.tensor, num_steps)
-    # elif gramatica_opcion == 3:
-    #     lexer = ACMulticapa03Lexer(input_stream)
-    #     parser = ACMulticapa03Parser(CommonTokenStream(lexer))
-    #     visitor = ACMulticapa03Interpreter()
-    # elif gramatica_opcion == 4:
-    #     lexer = ACMulticapa04Lexer(input_stream)
-    #     parser = ACMulticapa04Parser(CommonTokenStream(lexer))
-    #     visitor = ACMulticapa04Interpreter()
+        simulate_contagion02(
+            visitor.matrix_3d, visitor.duration_structure, visitor.prob_transitions, visitor.cell_transitions)
 
 
 # cd app
-# python main.py "D:/Documentos/Development Projects/UV-LP-Certamen1/app/data/escenario1.txt"
-
 parser = argparse.ArgumentParser(description='Procesar archivo especificado.')
 parser.add_argument('file_path', type=str,
                     help='La ruta del archivo a procesar.')
