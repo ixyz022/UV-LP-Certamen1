@@ -71,19 +71,20 @@ def printNormal(matrix, duration_structure, prob_transitions, cell_transitions):
 
 
 def simulate_contagion02(matrix, duration_structure, prob_transitions, cell_transitions, num_steps):
-    print_matrix_3d(matrix)
+    # print_matrix_3d(matrix)
     # print_duration_structure(duration_structure)
     # print_prob_transitions(prob_transitions)
     # print_cell_transitions(cell_transitions)
 
-    printNormal(matrix, duration_structure, prob_transitions, cell_transitions)
+    # printNormal(matrix, duration_structure, prob_transitions, cell_transitions)
 
     vecindades = obtener_vecindades(matrix)
     # imprimir_vecindades(vecindades)
 
-    # for i in range(num_steps):
-    #     actualizar_vecindad(matrix, duration_structure, prob_transitions)
-    #     print_matrix_3d(matrix)
+    for i in range(num_steps):
+        actualizar_vecindad(matrix, duration_structure, prob_transitions)
+        matrix = mover_poblacion_en_matriz(matrix)
+        print_matrix_3d(matrix)
 
 
 def obtener_vecinos(x, y, z, matriz):
@@ -178,14 +179,17 @@ def get_closest_transition(state, random_value, transitions_dict):
 def mover_poblacion_entre_estados(celda):
     # Obtener la lista de estados en la celda
     estados = list(celda['states'].keys())
-    if len(estados) < 2:
-        # No se pueden realizar movimientos si hay menos de 2 estados
+    estados_con_poblacion = [
+        estado for estado in estados if celda['states'][estado]['population'] > 0]
+
+    if len(estados_con_poblacion) < 2:
+        # No se pueden realizar movimientos si hay menos de 2 estados con población positiva
         return celda
 
     # Elegir un estado aleatoriamente como origen
-    estado_origen = random.choice(estados)
+    estado_origen = random.choice(estados_con_poblacion)
     # Elegir otro estado aleatoriamente como destino
-    estado_destino = random.choice(estados)
+    estado_destino = random.choice(estados_con_poblacion)
 
     if estado_origen != estado_destino:
         # Solo mover población si el estado de origen y destino son diferentes
@@ -199,3 +203,15 @@ def mover_poblacion_entre_estados(celda):
                 'population': poblacion_mover, 'counter': 0}
 
     return celda
+
+
+def mover_poblacion_en_matriz(matriz):
+    # Iterar a través de filas, columnas y niveles de la matriz
+    for i in range(len(matriz)):
+        for j in range(len(matriz[i])):
+            for k in range(len(matriz[i][j])):
+                celda_actualizada = mover_poblacion_entre_estados(
+                    matriz[i][j][k])
+                matriz[i][j][k] = celda_actualizada
+
+    return matriz
