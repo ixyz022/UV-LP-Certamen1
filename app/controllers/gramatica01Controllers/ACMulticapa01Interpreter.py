@@ -9,8 +9,8 @@ class ACMulticapa01Interpreter(ACMulticapa01Visitor):
         self.num_layers = 0
         self.current_layer_index = 0
         self.tensor = None
-        self.neighbor_transitions = []
-        self.duration_transitions = []
+        self.duration_transitions = {}
+        self.neighbor_transitions = {}
         self.state_durations = []
 
     def visitProgram(self, ctx: ACMulticapa01Parser.ProgramContext):
@@ -61,7 +61,15 @@ class ACMulticapa01Interpreter(ACMulticapa01Visitor):
     def visitDurationTransitionRule(self, ctx: ACMulticapa01Parser.DurationTransitionRuleContext):
         from_state = self.visit(ctx.basicState(0))
         to_state = self.visit(ctx.basicState(1))
-        self.duration_transitions.append({'from': from_state, 'to': to_state})
+        probability = float(ctx.NUMBER().getText())  # Obtener la probabilidad
+
+        # Verificar si el estado de origen ya tiene transiciones registradas
+        if from_state not in self.duration_transitions:
+            self.duration_transitions[from_state] = []
+
+        # Añadir la nueva transición a la lista de transiciones del estado de origen
+        self.duration_transitions[from_state].append(
+            {'to': to_state, 'probability': probability})
 
     def visitNeighborTransitions(self, ctx: ACMulticapa01Parser.NeighborTransitionsContext):
         for neighbor_transition_ctx in ctx.neighborTransitionRule():
@@ -71,8 +79,14 @@ class ACMulticapa01Interpreter(ACMulticapa01Visitor):
         from_state = self.visit(ctx.basicState(0))
         to_state = self.visit(ctx.basicState(1))
         condition = self.visit(ctx.condition())
-        self.neighbor_transitions.append(
-            {'from': from_state, 'to': to_state, 'condition': condition})
+
+        # Verificar si el estado de origen ya tiene transiciones registradas
+        if from_state not in self.neighbor_transitions:
+            self.neighbor_transitions[from_state] = []
+
+        # Añadir la nueva transición a la lista de transiciones del estado de origen
+        self.neighbor_transitions[from_state].append(
+            {'to': to_state, 'condition': condition})
 
     def visitBasicState(self, ctx: ACMulticapa01Parser.BasicStateContext):
         return ctx.getText()

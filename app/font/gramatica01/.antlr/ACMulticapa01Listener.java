@@ -17,6 +17,36 @@ public interface ACMulticapa01Listener extends ParseTreeListener {
 	 */
 	void exitProgram(ACMulticapa01Parser.ProgramContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ACMulticapa01Parser#ignoredLines}.
+	 * @param ctx the parse tree
+	 */
+	void enterIgnoredLines(ACMulticapa01Parser.IgnoredLinesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ACMulticapa01Parser#ignoredLines}.
+	 * @param ctx the parse tree
+	 */
+	void exitIgnoredLines(ACMulticapa01Parser.IgnoredLinesContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ACMulticapa01Parser#grammarChoice}.
+	 * @param ctx the parse tree
+	 */
+	void enterGrammarChoice(ACMulticapa01Parser.GrammarChoiceContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ACMulticapa01Parser#grammarChoice}.
+	 * @param ctx the parse tree
+	 */
+	void exitGrammarChoice(ACMulticapa01Parser.GrammarChoiceContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ACMulticapa01Parser#stepsChoice}.
+	 * @param ctx the parse tree
+	 */
+	void enterStepsChoice(ACMulticapa01Parser.StepsChoiceContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ACMulticapa01Parser#stepsChoice}.
+	 * @param ctx the parse tree
+	 */
+	void exitStepsChoice(ACMulticapa01Parser.StepsChoiceContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ACMulticapa01Parser#durationStandard}.
 	 * @param ctx the parse tree
 	 */
@@ -66,6 +96,16 @@ public interface ACMulticapa01Listener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBasicState(ACMulticapa01Parser.BasicStateContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ACMulticapa01Parser#transitions}.
+	 * @param ctx the parse tree
+	 */
+	void enterTransitions(ACMulticapa01Parser.TransitionsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ACMulticapa01Parser#transitions}.
+	 * @param ctx the parse tree
+	 */
+	void exitTransitions(ACMulticapa01Parser.TransitionsContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ACMulticapa01Parser#neighborTransitions}.
 	 * @param ctx the parse tree

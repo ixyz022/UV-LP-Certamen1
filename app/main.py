@@ -47,9 +47,10 @@ def realizar_simulacion(file_path):
         tree = parser.program()
         visitor = ACMulticapa01Interpreter()
         visitor.visit(tree)
-        print(visitor.state_durations, "\n", visitor.tensor, "\n",
-              visitor.duration_transitions, "\n", visitor.neighbor_transitions)
-        result = simulate_contagion01(visitor.tensor)
+        # print(visitor.state_durations, "\n", visitor.tensor, "\n",
+        #     visitor.duration_transitions, "\n", visitor.neighbor_transitions)
+        result = simulate_contagion01(
+            visitor.tensor, visitor.duration_transitions, visitor.state_durations,  visitor.neighbor_transitions, num_steps)
 
     elif gramatica_opcion == 2:
         lexer = ACMulticapa02Lexer(input_stream)

@@ -10,7 +10,7 @@ else:
 
 def serializedATN():
     return [
-        4,1,24,127,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,25,129,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
         2,14,7,14,1,0,3,0,32,8,0,1,0,3,0,35,8,0,1,0,4,0,38,8,0,11,0,12,0,
         39,1,0,5,0,43,8,0,10,0,12,0,46,9,0,1,0,1,0,1,1,1,1,1,1,1,2,1,2,1,
@@ -19,36 +19,36 @@ def serializedATN():
         7,1,7,1,7,1,7,1,8,1,8,1,9,1,9,3,9,91,8,9,1,10,1,10,1,10,4,10,96,
         8,10,11,10,12,10,97,1,10,1,10,1,11,1,11,1,11,1,11,1,11,1,11,1,11,
         1,12,1,12,1,12,4,12,112,8,12,11,12,12,12,113,1,12,1,12,1,13,1,13,
-        1,13,1,13,1,14,1,14,1,14,1,14,1,14,1,14,0,0,15,0,2,4,6,8,10,12,14,
-        16,18,20,22,24,26,28,0,1,1,0,10,14,120,0,31,1,0,0,0,2,49,1,0,0,0,
-        4,52,1,0,0,0,6,55,1,0,0,0,8,58,1,0,0,0,10,67,1,0,0,0,12,70,1,0,0,
-        0,14,80,1,0,0,0,16,86,1,0,0,0,18,90,1,0,0,0,20,92,1,0,0,0,22,101,
-        1,0,0,0,24,108,1,0,0,0,26,117,1,0,0,0,28,121,1,0,0,0,30,32,3,2,1,
-        0,31,30,1,0,0,0,31,32,1,0,0,0,32,34,1,0,0,0,33,35,3,8,4,0,34,33,
-        1,0,0,0,34,35,1,0,0,0,35,37,1,0,0,0,36,38,3,12,6,0,37,36,1,0,0,0,
-        38,39,1,0,0,0,39,37,1,0,0,0,39,40,1,0,0,0,40,44,1,0,0,0,41,43,3,
-        18,9,0,42,41,1,0,0,0,43,46,1,0,0,0,44,42,1,0,0,0,44,45,1,0,0,0,45,
-        47,1,0,0,0,46,44,1,0,0,0,47,48,5,0,0,1,48,1,1,0,0,0,49,50,3,4,2,
-        0,50,51,3,6,3,0,51,3,1,0,0,0,52,53,5,1,0,0,53,54,5,23,0,0,54,5,1,
-        0,0,0,55,56,5,2,0,0,56,57,5,23,0,0,57,7,1,0,0,0,58,59,5,3,0,0,59,
-        61,5,4,0,0,60,62,3,10,5,0,61,60,1,0,0,0,62,63,1,0,0,0,63,61,1,0,
-        0,0,63,64,1,0,0,0,64,65,1,0,0,0,65,66,5,5,0,0,66,9,1,0,0,0,67,68,
-        3,16,8,0,68,69,5,23,0,0,69,11,1,0,0,0,70,71,5,6,0,0,71,72,5,23,0,
-        0,72,74,5,4,0,0,73,75,3,14,7,0,74,73,1,0,0,0,75,76,1,0,0,0,76,74,
-        1,0,0,0,76,77,1,0,0,0,77,78,1,0,0,0,78,79,5,5,0,0,79,13,1,0,0,0,
-        80,81,5,7,0,0,81,82,5,23,0,0,82,83,5,8,0,0,83,84,3,16,8,0,84,85,
-        5,9,0,0,85,15,1,0,0,0,86,87,7,0,0,0,87,17,1,0,0,0,88,91,3,20,10,
-        0,89,91,3,24,12,0,90,88,1,0,0,0,90,89,1,0,0,0,91,19,1,0,0,0,92,93,
-        5,15,0,0,93,95,5,4,0,0,94,96,3,22,11,0,95,94,1,0,0,0,96,97,1,0,0,
-        0,97,95,1,0,0,0,97,98,1,0,0,0,98,99,1,0,0,0,99,100,5,5,0,0,100,21,
-        1,0,0,0,101,102,5,16,0,0,102,103,3,16,8,0,103,104,5,17,0,0,104,105,
-        3,16,8,0,105,106,5,18,0,0,106,107,3,28,14,0,107,23,1,0,0,0,108,109,
-        5,19,0,0,109,111,5,4,0,0,110,112,3,26,13,0,111,110,1,0,0,0,112,113,
-        1,0,0,0,113,111,1,0,0,0,113,114,1,0,0,0,114,115,1,0,0,0,115,116,
-        5,5,0,0,116,25,1,0,0,0,117,118,3,16,8,0,118,119,5,17,0,0,119,120,
-        3,16,8,0,120,27,1,0,0,0,121,122,5,20,0,0,122,123,5,23,0,0,123,124,
-        5,21,0,0,124,125,3,16,8,0,125,29,1,0,0,0,9,31,34,39,44,63,76,90,
-        97,113
+        1,13,1,13,1,13,1,13,1,14,1,14,1,14,1,14,1,14,1,14,0,0,15,0,2,4,6,
+        8,10,12,14,16,18,20,22,24,26,28,0,1,1,0,10,14,122,0,31,1,0,0,0,2,
+        49,1,0,0,0,4,52,1,0,0,0,6,55,1,0,0,0,8,58,1,0,0,0,10,67,1,0,0,0,
+        12,70,1,0,0,0,14,80,1,0,0,0,16,86,1,0,0,0,18,90,1,0,0,0,20,92,1,
+        0,0,0,22,101,1,0,0,0,24,108,1,0,0,0,26,117,1,0,0,0,28,123,1,0,0,
+        0,30,32,3,2,1,0,31,30,1,0,0,0,31,32,1,0,0,0,32,34,1,0,0,0,33,35,
+        3,8,4,0,34,33,1,0,0,0,34,35,1,0,0,0,35,37,1,0,0,0,36,38,3,12,6,0,
+        37,36,1,0,0,0,38,39,1,0,0,0,39,37,1,0,0,0,39,40,1,0,0,0,40,44,1,
+        0,0,0,41,43,3,18,9,0,42,41,1,0,0,0,43,46,1,0,0,0,44,42,1,0,0,0,44,
+        45,1,0,0,0,45,47,1,0,0,0,46,44,1,0,0,0,47,48,5,0,0,1,48,1,1,0,0,
+        0,49,50,3,4,2,0,50,51,3,6,3,0,51,3,1,0,0,0,52,53,5,1,0,0,53,54,5,
+        24,0,0,54,5,1,0,0,0,55,56,5,2,0,0,56,57,5,24,0,0,57,7,1,0,0,0,58,
+        59,5,3,0,0,59,61,5,4,0,0,60,62,3,10,5,0,61,60,1,0,0,0,62,63,1,0,
+        0,0,63,61,1,0,0,0,63,64,1,0,0,0,64,65,1,0,0,0,65,66,5,5,0,0,66,9,
+        1,0,0,0,67,68,3,16,8,0,68,69,5,24,0,0,69,11,1,0,0,0,70,71,5,6,0,
+        0,71,72,5,24,0,0,72,74,5,4,0,0,73,75,3,14,7,0,74,73,1,0,0,0,75,76,
+        1,0,0,0,76,74,1,0,0,0,76,77,1,0,0,0,77,78,1,0,0,0,78,79,5,5,0,0,
+        79,13,1,0,0,0,80,81,5,7,0,0,81,82,5,24,0,0,82,83,5,8,0,0,83,84,3,
+        16,8,0,84,85,5,9,0,0,85,15,1,0,0,0,86,87,7,0,0,0,87,17,1,0,0,0,88,
+        91,3,20,10,0,89,91,3,24,12,0,90,88,1,0,0,0,90,89,1,0,0,0,91,19,1,
+        0,0,0,92,93,5,15,0,0,93,95,5,4,0,0,94,96,3,22,11,0,95,94,1,0,0,0,
+        96,97,1,0,0,0,97,95,1,0,0,0,97,98,1,0,0,0,98,99,1,0,0,0,99,100,5,
+        5,0,0,100,21,1,0,0,0,101,102,5,16,0,0,102,103,3,16,8,0,103,104,5,
+        17,0,0,104,105,3,16,8,0,105,106,5,18,0,0,106,107,3,28,14,0,107,23,
+        1,0,0,0,108,109,5,19,0,0,109,111,5,4,0,0,110,112,3,26,13,0,111,110,
+        1,0,0,0,112,113,1,0,0,0,113,111,1,0,0,0,113,114,1,0,0,0,114,115,
+        1,0,0,0,115,116,5,5,0,0,116,25,1,0,0,0,117,118,3,16,8,0,118,119,
+        5,17,0,0,119,120,3,16,8,0,120,121,5,20,0,0,121,122,5,24,0,0,122,
+        27,1,0,0,0,123,124,5,21,0,0,124,125,5,24,0,0,125,126,5,22,0,0,126,
+        127,3,16,8,0,127,29,1,0,0,0,9,31,34,39,44,63,76,90,97,113
     ]
 
 class ACMulticapa01Parser ( Parser ):
@@ -65,14 +65,16 @@ class ACMulticapa01Parser ( Parser ):
                      "'{'", "'}'", "'CAPA'", "'CELDA'", "'('", "')'", "'SUSCEPTIBLE'", 
                      "'EXPUESTO'", "'INFECTADO'", "'RECUPERADO'", "'MUERTO'", 
                      "'TRANSICIONES POR VECINOS'", "'REGLA'", "'->'", "'SI'", 
-                     "'TRANSICIONES POR DURACION'", "'HAY'", "'VECINOS'" ]
+                     "'TRANSICIONES POR DURACION'", "'PROBABILIDAD'", "'HAY'", 
+                     "'VECINOS'" ]
 
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "STRING", "NUMBER", "WS" ]
+                      "<INVALID>", "<INVALID>", "<INVALID>", "STRING", "NUMBER", 
+                      "WS" ]
 
     RULE_program = 0
     RULE_ignoredLines = 1
@@ -117,9 +119,10 @@ class ACMulticapa01Parser ( Parser ):
     T__18=19
     T__19=20
     T__20=21
-    STRING=22
-    NUMBER=23
-    WS=24
+    T__21=22
+    STRING=23
+    NUMBER=24
+    WS=25
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -164,6 +167,14 @@ class ACMulticapa01Parser ( Parser ):
 
         def getRuleIndex(self):
             return ACMulticapa01Parser.RULE_program
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterProgram" ):
+                listener.enterProgram(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitProgram" ):
+                listener.exitProgram(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitProgram" ):
@@ -248,6 +259,14 @@ class ACMulticapa01Parser ( Parser ):
         def getRuleIndex(self):
             return ACMulticapa01Parser.RULE_ignoredLines
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterIgnoredLines" ):
+                listener.enterIgnoredLines(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitIgnoredLines" ):
+                listener.exitIgnoredLines(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitIgnoredLines" ):
                 return visitor.visitIgnoredLines(self)
@@ -289,6 +308,14 @@ class ACMulticapa01Parser ( Parser ):
         def getRuleIndex(self):
             return ACMulticapa01Parser.RULE_grammarChoice
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterGrammarChoice" ):
+                listener.enterGrammarChoice(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitGrammarChoice" ):
+                listener.exitGrammarChoice(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitGrammarChoice" ):
                 return visitor.visitGrammarChoice(self)
@@ -329,6 +356,14 @@ class ACMulticapa01Parser ( Parser ):
 
         def getRuleIndex(self):
             return ACMulticapa01Parser.RULE_stepsChoice
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterStepsChoice" ):
+                listener.enterStepsChoice(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitStepsChoice" ):
+                listener.exitStepsChoice(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitStepsChoice" ):
@@ -374,6 +409,14 @@ class ACMulticapa01Parser ( Parser ):
 
         def getRuleIndex(self):
             return ACMulticapa01Parser.RULE_durationStandard
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterDurationStandard" ):
+                listener.enterDurationStandard(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitDurationStandard" ):
+                listener.exitDurationStandard(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitDurationStandard" ):
@@ -435,6 +478,14 @@ class ACMulticapa01Parser ( Parser ):
         def getRuleIndex(self):
             return ACMulticapa01Parser.RULE_durationState
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterDurationState" ):
+                listener.enterDurationState(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitDurationState" ):
+                listener.exitDurationState(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitDurationState" ):
                 return visitor.visitDurationState(self)
@@ -482,6 +533,14 @@ class ACMulticapa01Parser ( Parser ):
 
         def getRuleIndex(self):
             return ACMulticapa01Parser.RULE_layer
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterLayer" ):
+                listener.enterLayer(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitLayer" ):
+                listener.exitLayer(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitLayer" ):
@@ -545,6 +604,14 @@ class ACMulticapa01Parser ( Parser ):
         def getRuleIndex(self):
             return ACMulticapa01Parser.RULE_cell
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterCell" ):
+                listener.enterCell(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitCell" ):
+                listener.exitCell(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitCell" ):
                 return visitor.visitCell(self)
@@ -589,6 +656,14 @@ class ACMulticapa01Parser ( Parser ):
 
         def getRuleIndex(self):
             return ACMulticapa01Parser.RULE_basicState
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBasicState" ):
+                listener.enterBasicState(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBasicState" ):
+                listener.exitBasicState(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitBasicState" ):
@@ -639,6 +714,14 @@ class ACMulticapa01Parser ( Parser ):
 
         def getRuleIndex(self):
             return ACMulticapa01Parser.RULE_transitions
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterTransitions" ):
+                listener.enterTransitions(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitTransitions" ):
+                listener.exitTransitions(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitTransitions" ):
@@ -695,6 +778,14 @@ class ACMulticapa01Parser ( Parser ):
 
         def getRuleIndex(self):
             return ACMulticapa01Parser.RULE_neighborTransitions
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterNeighborTransitions" ):
+                listener.enterNeighborTransitions(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitNeighborTransitions" ):
+                listener.exitNeighborTransitions(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitNeighborTransitions" ):
@@ -760,6 +851,14 @@ class ACMulticapa01Parser ( Parser ):
         def getRuleIndex(self):
             return ACMulticapa01Parser.RULE_neighborTransitionRule
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterNeighborTransitionRule" ):
+                listener.enterNeighborTransitionRule(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitNeighborTransitionRule" ):
+                listener.exitNeighborTransitionRule(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitNeighborTransitionRule" ):
                 return visitor.visitNeighborTransitionRule(self)
@@ -812,6 +911,14 @@ class ACMulticapa01Parser ( Parser ):
 
         def getRuleIndex(self):
             return ACMulticapa01Parser.RULE_durationTransitions
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterDurationTransitions" ):
+                listener.enterDurationTransitions(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitDurationTransitions" ):
+                listener.exitDurationTransitions(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitDurationTransitions" ):
@@ -870,8 +977,19 @@ class ACMulticapa01Parser ( Parser ):
                 return self.getTypedRuleContext(ACMulticapa01Parser.BasicStateContext,i)
 
 
+        def NUMBER(self):
+            return self.getToken(ACMulticapa01Parser.NUMBER, 0)
+
         def getRuleIndex(self):
             return ACMulticapa01Parser.RULE_durationTransitionRule
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterDurationTransitionRule" ):
+                listener.enterDurationTransitionRule(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitDurationTransitionRule" ):
+                listener.exitDurationTransitionRule(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitDurationTransitionRule" ):
@@ -894,6 +1012,10 @@ class ACMulticapa01Parser ( Parser ):
             self.match(ACMulticapa01Parser.T__16)
             self.state = 119
             self.basicState()
+            self.state = 120
+            self.match(ACMulticapa01Parser.T__19)
+            self.state = 121
+            self.match(ACMulticapa01Parser.NUMBER)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -920,6 +1042,14 @@ class ACMulticapa01Parser ( Parser ):
         def getRuleIndex(self):
             return ACMulticapa01Parser.RULE_condition
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterCondition" ):
+                listener.enterCondition(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitCondition" ):
+                listener.exitCondition(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitCondition" ):
                 return visitor.visitCondition(self)
@@ -935,13 +1065,13 @@ class ACMulticapa01Parser ( Parser ):
         self.enterRule(localctx, 28, self.RULE_condition)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 121
-            self.match(ACMulticapa01Parser.T__19)
-            self.state = 122
-            self.match(ACMulticapa01Parser.NUMBER)
             self.state = 123
             self.match(ACMulticapa01Parser.T__20)
             self.state = 124
+            self.match(ACMulticapa01Parser.NUMBER)
+            self.state = 125
+            self.match(ACMulticapa01Parser.T__21)
+            self.state = 126
             self.basicState()
         except RecognitionException as re:
             localctx.exception = re

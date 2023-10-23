@@ -28,6 +28,42 @@ public class ACMulticapa01BaseListener implements ACMulticapa01Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterIgnoredLines(ACMulticapa01Parser.IgnoredLinesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIgnoredLines(ACMulticapa01Parser.IgnoredLinesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterGrammarChoice(ACMulticapa01Parser.GrammarChoiceContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitGrammarChoice(ACMulticapa01Parser.GrammarChoiceContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterStepsChoice(ACMulticapa01Parser.StepsChoiceContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStepsChoice(ACMulticapa01Parser.StepsChoiceContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDurationStandard(ACMulticapa01Parser.DurationStandardContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -83,6 +119,18 @@ public class ACMulticapa01BaseListener implements ACMulticapa01Listener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitBasicState(ACMulticapa01Parser.BasicStateContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTransitions(ACMulticapa01Parser.TransitionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTransitions(ACMulticapa01Parser.TransitionsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

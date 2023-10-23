@@ -42,7 +42,8 @@ neighborTransitionRule:
 durationTransitions:
 	'TRANSICIONES POR DURACION' '{' durationTransitionRule+ '}';
 
-durationTransitionRule: basicState '->' basicState;
+durationTransitionRule:
+	basicState '->' basicState 'PROBABILIDAD' NUMBER;
 
 condition: 'HAY' NUMBER 'VECINOS' basicState;
 
