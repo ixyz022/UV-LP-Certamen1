@@ -24,7 +24,6 @@ def imprimir_matriz(matriz):
 def simulate_contagion01(matriz, duration_transitions, state_durations, neighbor_transitions, num_steps):
     vecindades = obtener_vecindades(matriz)
     for i in range(num_steps):
-
         # imprimir_vecindades(vecindades)
         imprimir_matriz(matriz)
         actualizar_vecindad(matriz, vecindades,
@@ -32,6 +31,7 @@ def simulate_contagion01(matriz, duration_transitions, state_durations, neighbor
         imprimir_matriz(matriz)
         # imprimir_vecindades(vecindades)
         perform_transitions(matriz, neighbor_transitions)
+
     print(contar_estados(matriz, vecindades))
     imprimir_matriz(matriz)
 
