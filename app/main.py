@@ -41,6 +41,7 @@ def realizar_simulacion(file_path):
     input_stream = FileStream(file_path)
 
     # python main.py "D:/Documentos/Development Projects/UV-LP-Certamen1/app/data/escenario1.txt"
+    # python main.py "C:\Users\ixyz0\Personal\Dev\UV-LP-Certamen1\app\data/escenario1.txt"
     if gramatica_opcion == 1:
 
         lexer = ACMulticapa01Lexer(input_stream)
@@ -55,6 +56,7 @@ def realizar_simulacion(file_path):
             visitor.tensor, visitor.duration_transitions, visitor.state_durations,  visitor.neighbor_transitions, num_steps)
 
     # python main.py "D:/Documentos/Development Projects/UV-LP-Certamen1/app/data/escenario2.txt"
+    # python main.py "C:\Users\ixyz0\Personal\Dev\UV-LP-Certamen1\app\data/escenario2.txt"
     elif gramatica_opcion == 2:
         lexer = ACMulticapa02Lexer(input_stream)
         token_stream = CommonTokenStream(lexer)
