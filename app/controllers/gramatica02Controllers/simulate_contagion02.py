@@ -73,42 +73,66 @@ def printNormal(matrix, duration_structure, prob_transitions, cell_transitions):
     print(cell_transitions)
 
 
+def imprimir_matriz(matriz, num_step):
+    print(
+        f'--------------------------------- Paso número: {num_step+1} ---------------------------------------')
+    D1, D2, D3 = len(matriz), len(matriz[0]), len(matriz[0][0])
+    for i in range(D1):
+        print(f'Capa {i}:')
+        for j in range(D2):
+            fila = []
+            for k in range(D3):
+                cell = matriz[i][j][k]
+                cell_str = f"B" if cell['BLOQUEADO'] else ""
+                states_str = ", ".join(
+                    [f"{estado}: {info['population']}" for estado, info in cell['states'].items()])
+                if cell_str and states_str:
+                    fila.append(f"{cell_str} ({states_str})")
+                elif cell_str:
+                    fila.append(cell_str)
+                elif states_str:
+                    fila.append(states_str)
+                else:
+                    fila.append("-")
+            fila_str = " | ".join(fila)
+            print(fila_str)
+        print('\n')  # Imprime una línea en blanco entre capas
+
+
 def simulate_contagion02(matrix, duration_structure, prob_transitions, cell_transitions, num_steps):
-    # print_matrix_3d(matrix)
-    # print_duration_structure(duration_structure)
-    # print_prob_transitions(prob_transitions)
-    # print_cell_transitions(cell_transitions)
-
-    # printNormal(matrix, duration_structure, prob_transitions, cell_transitions)
-
-    vecindades = obtener_vecindades(matrix)
-
+    imprimir_matriz(matrix, -1)  # Mostrar matriz inicial
     for i in range(num_steps):
-        verificar_condiciones_transicion(matrix, cell_transitions)
-        actualizar_vecindad(matrix, duration_structure, prob_transitions)
-        matrix = mover_poblacion_en_matriz(matrix)
-        print_matrix_3d(matrix)
-        realizar_transacciones_entre_celdas(matrix)
+
+        vecindades = obtener_vecindades(matrix)
+        print(vecindades)
+        imprimir_matriz(matrix, i)
+    #     verificar_condiciones_transicion(matrix, cell_transitions)
+    #     actualizar_vecindad(matrix, duration_structure, prob_transitions)
+    #     matrix = mover_poblacion_en_matriz(matrix)
+    #     print_matrix_3d(matrix)
+    #     realizar_transacciones_entre_celdas(matrix)
 
 
 def obtener_vecinos(x, y, z, matriz):
     vecinos = []
-    nx, ny, nz = len(matriz), len(matriz[0]), len(matriz[0][0])
-
-    for dx in [-1, 0, 1]:
-        for dy in [-1, 0, 1]:
-            for dz in [-1, 0, 1]:
-                if dx == dy == dz == 0:
-                    continue
-                nx_coord, ny_coord, nz_coord = x + dx, y + dy, z + dz
-                if 0 <= nx_coord < nx and 0 <= ny_coord < ny and 0 <= nz_coord < nz:
-                    vecinos.append((nx_coord, ny_coord, nz_coord))
+    D1, D2, D3 = len(matriz), len(matriz[0]), len(matriz[0][0])
+    # Vecinos en la misma capa
+    for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+        nx, ny = x + dx, y + dy
+        if 0 <= nx < D1 and 0 <= ny < D2:
+            vecinos.append((nx, ny, z))
+    # Vecino inmediatamente arriba e inmediatamente debajo
+    for dz in [-1, 1]:
+        nz = z + dz
+        if 0 <= nz < D3:
+            vecinos.append((x, y, nz))
     return vecinos
 
 
 def obtener_vecindades(matriz):
     vecindades = []
     nx, ny, nz = len(matriz), len(matriz[0]), len(matriz[0][0])
+
     for i in range(nx):
         for j in range(ny):
             for k in range(nz):

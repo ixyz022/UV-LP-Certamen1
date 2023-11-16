@@ -50,9 +50,7 @@ def realizar_simulacion(file_path):
         tree = parser.program()
         visitor = ACMulticapa01Interpreter()
         visitor.visit(tree)
-        print(visitor.state_durations, "\n", visitor.tensor, "\n",
-              visitor.duration_transitions, "\n", visitor.neighbor_transitions)
-        result = simulate_contagion01(
+        simulate_contagion01(
             visitor.tensor, visitor.duration_transitions, visitor.state_durations,  visitor.neighbor_transitions, num_steps)
 
     # python main.py "D:/Documentos/Development Projects/UV-LP-Certamen1/app/data/escenario2.txt"

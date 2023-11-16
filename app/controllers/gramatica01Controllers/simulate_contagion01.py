@@ -10,8 +10,10 @@ def imprimir_vecindades(vecindades):
         print('-' * 40)  # Imprime una línea horizontal como separador
 
 
-def imprimir_matriz(matriz):
+def imprimir_matriz(matriz, num_step):
     D1, D2, D3 = len(matriz), len(matriz[0]), len(matriz[0][0])
+    print(
+        f'--------------------------------- Paso número: {num_step+1} ---------------------------------------')
     for i in range(D1):
         print(f'Capa {i}:')
         for j in range(D2):
@@ -22,18 +24,13 @@ def imprimir_matriz(matriz):
 
 
 def simulate_contagion01(matriz, duration_transitions, state_durations, neighbor_transitions, num_steps):
-    vecindades = obtener_vecindades(matriz)
+    imprimir_matriz(matriz, -1)  # Mostrar matriz inicial
     for i in range(num_steps):
-        # imprimir_vecindades(vecindades)
-        imprimir_matriz(matriz)
-        actualizar_vecindad(matriz, vecindades,
-                            duration_transitions, state_durations)
-        imprimir_matriz(matriz)
-        # imprimir_vecindades(vecindades)
-        perform_transitions(matriz, neighbor_transitions)
 
-    print(contar_estados(matriz, vecindades))
-    imprimir_matriz(matriz)
+        actualizar_vecindad(matriz,
+                            duration_transitions, state_durations)
+        perform_transitions(matriz, neighbor_transitions)
+        imprimir_matriz(matriz, i)
 
 
 def check_transition(neighbor_states, transition_condition):
@@ -46,6 +43,8 @@ def check_transition(neighbor_states, transition_condition):
 
 def perform_transitions(matriz, transitions_dict):
     D1, D2, D3 = matriz.shape
+    transitions_to_apply = []
+
     for i in range(D1):
         for j in range(D2):
             for k in range(D3):
@@ -57,20 +56,19 @@ def perform_transitions(matriz, transitions_dict):
                         condition = rule['condition']
                         required_state = condition['state']
                         required_number = condition['number']
-                        # Asume que tienes una función que obtiene las coordenadas de los vecinos
+
                         neighbor_coords = obtener_vecinos(i, j, k, matriz)
                         count_required_state = sum(
-                            1 for coord in neighbor_coords if matriz[coord]['state'] == required_state)
+                            matriz[nx, ny, nz]['state'] == required_state for nx, ny, nz in neighbor_coords
+                        )
+
                         if count_required_state >= required_number:
-                            # Transición realizada, imprime la información
-                            print(f'Transición en {i, j, k}:')
-                            print(f'  Coordenada alterada: {i, j, k}')
-                            print(f'  {current_state} -> {to_state}')
-                            print(
-                                f'  Coordenadas de celdas vecinas requeridas: {[coord for coord in neighbor_coords if matriz[coord]["state"] == required_state]}')
-                            print(
-                                f'  Cantidad de celdas vecinas necesarias: {count_required_state}')
-                            matriz[i, j, k]['state'] = to_state
+                            transitions_to_apply.append(((i, j, k), to_state))
+
+    # Aplicar transiciones
+    for coord, new_state in transitions_to_apply:
+        matriz[coord]['state'] = new_state
+        # print(f'Transición realizada en {coord}: {current_state} -> {new_state}')
 
 
 def contar_estados(matriz, vecindades):
@@ -93,15 +91,17 @@ def contar_estados(matriz, vecindades):
 
 def obtener_vecinos(x, y, z, matriz):
     vecinos = []
-    D1, D2, D3 = matriz.shape
-    for dx in [-1, 0, 1]:
-        for dy in [-1, 0, 1]:
-            for dz in [-1, 0, 1]:
-                if dx == dy == dz == 0:
-                    continue
-                nx, ny, nz = x + dx, y + dy, z + dz
-                if 0 <= nx < D1 and 0 <= ny < D2 and 0 <= nz < D3:
-                    vecinos.append((nx, ny, nz))
+    D1, D2, D3 = len(matriz), len(matriz[0]), len(matriz[0][0])
+    # Vecinos en la misma capa
+    for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+        nx, ny = x + dx, y + dy
+        if 0 <= nx < D1 and 0 <= ny < D2:
+            vecinos.append((nx, ny, z))
+    # Vecino inmediatamente arriba e inmediatamente debajo
+    for dz in [-1, 1]:
+        nz = z + dz
+        if 0 <= nz < D3:
+            vecinos.append((x, y, nz))
     return vecinos
 
 
@@ -109,31 +109,19 @@ def obtener_vecindades(matriz):
     vecindades = []
     nx, ny, nz = len(matriz), len(matriz[0]), len(matriz[0][0])
 
-    def obtener_vecinos(x, y, z):
-        vecinos = []
-        for dx in [-1, 0, 1]:
-            for dy in [-1, 0, 1]:
-                for dz in [-1, 0, 1]:
-                    if dx == dy == dz == 0:
-                        continue
-                    nx, ny, nz = x + dx, y + dy, z + dz
-                    if 0 <= nx < len(matriz) and 0 <= ny < len(matriz[0]) and 0 <= nz < len(matriz[0][0]):
-                        vecinos.append((nx, ny, nz))
-        return vecinos
-
     for i in range(nx):
         for j in range(ny):
             for k in range(nz):
                 celda_info = {
                     'capa': i,
                     'identificador': (i, j, k),
-                    'vecinos': obtener_vecinos(i, j, k)
+                    'vecinos': obtener_vecinos(i, j, k, matriz)
                 }
                 vecindades.append(celda_info)
     return vecindades
 
 
-def actualizar_vecindad(matriz, vecindades, duration_transitions, state_durations):
+def actualizar_vecindad(matriz, duration_transitions, state_durations):
     D1, D2, D3 = len(matriz), len(matriz[0]), len(matriz[0][0])
     for i in range(D1):
         for j in range(D2):
@@ -146,14 +134,23 @@ def actualizar_vecindad(matriz, vecindades, duration_transitions, state_duration
 def transicionar_estado(duration_transitions, state_durations, celda):
     estado_actual = celda['state']
     contador_actual = celda['counter']
-    for i in state_durations:
-        if contador_actual == i["duration"] and estado_actual == i["state"]:
+
+    for duracion in state_durations:
+        # print(duracion)
+        # print(estado_actual, contador_actual,
+        #       duracion["duration"], duracion["state"], contador_actual == duracion["duration"], estado_actual == duracion["state"])
+        if contador_actual >= duracion["duration"] and estado_actual == duracion["state"]:
             valor_aleatorio = random.random()
             resultado_transicion = get_closest_transition(
                 estado_actual, valor_aleatorio, duration_transitions)
-            celda['state'] = resultado_transicion
-            celda['counter'] = 0
-            return celda
+
+            # Aplicar la transición y reiniciar el contador si el estado cambia
+            if resultado_transicion != estado_actual:
+                celda['state'] = resultado_transicion
+                celda['counter'] = 0
+                return celda
+
+    # Si no se realiza ninguna transición, devolver la celda sin cambios
     return celda
 
 
