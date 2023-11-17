@@ -2,77 +2,6 @@ import numpy as np
 import random
 
 
-def print_matrix_3d(matrix_3d):
-    for layer_index, layer in enumerate(matrix_3d):
-        print(f"Capa {layer_index}:")
-        for row_index, row in enumerate(layer):
-            for col_index, cell in enumerate(row):
-                cell_str = ', '.join(
-                    f'{state}: {info}' for state, info in cell['states'].items())
-                total_population = sum(info['population']
-                                       for info in cell['states'].values())
-                blocked_str = "Bloqueada" if cell['BLOQUEADO'] else "No Bloqueada"
-                print(
-                    f"    Celda ({layer_index}, {row_index}, {col_index}) ({blocked_str}): {cell_str}, Población Total: {total_population}")
-
-        print()  # Imprime una línea en blanco entre capas
-
-
-def print_duration_structure(duration_structure):
-    print("Estructura de Duración:")
-    for index, duration in enumerate(duration_structure, start=1):
-        if duration is None:
-            print(f"    {index}. Error: El elemento es None")
-        elif isinstance(duration, dict):
-            # Obtén el estado, o 'N/A' si no está presente.
-            state = duration.get('state', 'N/A')
-            # Obtén la duración, o 'N/A' si no está presente.
-            duration_value = duration.get('duration', 'N/A')
-            print(f"    {index}. Estado: {state}, Duración: {duration_value}")
-        else:
-            print(f"    {index}. Error: El elemento no es un diccionario")
-
-
-def print_prob_transitions(prob_transitions):
-    print("Transiciones de Probabilidad:")
-    for from_state, transitions in prob_transitions.items():
-        print(f"    Desde el estado: {from_state}")
-        for index, transition in enumerate(transitions, start=1):
-            to_state = transition.get('to', 'N/A')
-            probability = transition.get('probability', 'N/A')
-            print(
-                f"        {index}. Hacia: {to_state}, Probabilidad: {probability}")
-
-
-def print_cell_transitions(cell_transitions):
-    print("Transiciones de Celda:")
-    for from_state, transitions in cell_transitions.items():
-        print(f"    Desde el estado: {from_state}")
-        for index, transition in enumerate(transitions, start=1):
-            to_state = transition.get('to', 'N/A')
-            condition = transition.get('condition', {})
-            condition_state = condition.get('state', 'N/A')
-            operator = condition.get('operator', 'N/A')
-            number = condition.get('number', 'N/A')
-            print(
-                f"        {index}. Hacia: {to_state}, Condición: {condition_state} {operator} {number}")
-
-
-def imprimir_vecindades(vecindades):
-    for i, vecindad in enumerate(vecindades):
-        print(f'Vecindad {i + 1}:')
-        for clave, valor in vecindad.items():
-            print(f'  {clave}: {valor}')
-        print('-' * 40)  # Imprime una línea horizontal como separador
-
-
-def printNormal(matrix, duration_structure, prob_transitions, cell_transitions):
-    print(matrix)
-    print(duration_structure)
-    print(prob_transitions)
-    print(cell_transitions)
-
-
 def imprimir_matriz(matriz, num_step):
     print(
         f'--------------------------------- Paso número: {num_step+1} ---------------------------------------')
@@ -100,50 +29,135 @@ def imprimir_matriz(matriz, num_step):
 
 
 def simulate_contagion02(matrix, duration_structure, prob_transitions, cell_transitions, num_steps):
-    print(matrix)
+
     imprimir_matriz(matrix, -1)  # Mostrar matriz inicial
 
     for i in range(num_steps):
+        reglas_transicion(matrix, cell_transitions)
         actualizar_vecindad(matrix,
                             prob_transitions, duration_structure)
-        imprimir_matriz(matrix, i)
-    #     verificar_condiciones_transicion(matrix, cell_transitions)
-    #     actualizar_vecindad(matrix, duration_structure, prob_transitions)
-    #     matrix = mover_poblacion_en_matriz(matrix)
-    #     print_matrix_3d(matrix)
-    #     realizar_transacciones_entre_celdas(matrix)
+        realizar_transacciones_entre_celdas(matrix)
+        imprimir_matriz(matrix, i)  # Mostrar matriz inicial
+    # imprimir_matriz(matrix, 100)  # Mostrar matriz final
+
+
+def reglas_transicion(matrix, cell_transitions):
+    reglas = obtener_reglas(cell_transitions)
+    for i, capa in enumerate(matrix):
+        for j, fila in enumerate(capa):
+            for k, celda in enumerate(fila):
+                # Esta la celda bloqueada?
+                if (celda['BLOQUEADO']):
+                    continue
+
+                vecinos = obtener_vecinos(i, j, k, matrix)
+                # Obtener la población total de los vecinos
+                poblacion_vecinos = obtener_poblacion_total_de_vecinos(
+                    matrix, vecinos)
+                resultados_condiciones = verificar_condiciones_transicion(
+                    poblacion_vecinos, reglas)
+                aplicar_transiciones_celda(
+                    celda, resultados_condiciones)
+
+
+def aplicar_transiciones_celda(celda, resultados_condiciones):
+    for resultado in resultados_condiciones:
+        estado_actual, estado_destino, condicion_cumplida = resultado
+
+        # Verificar si la celda está en el estado adecuado y la condición se cumple
+        if estado_actual in celda['states'] and condicion_cumplida:
+            poblacion_actual = celda['states'][estado_actual]['population']
+
+            # Asegurarse de que hay población para transferir
+            if poblacion_actual > 0:
+                # Calcular una cantidad aleatoria de población para transferir
+                cantidad_transferir = random.randint(0, poblacion_actual)
+
+                # Disminuir la población en el estado actual
+                celda['states'][estado_actual]['population'] -= cantidad_transferir
+
+                # Si la población del estado actual llega a 0, eliminar el estado
+                if celda['states'][estado_actual]['population'] == 0:
+                    del celda['states'][estado_actual]
+
+                # Aumentar la población en el estado de destino
+                if estado_destino in celda['states']:
+                    celda['states'][estado_destino]['population'] += cantidad_transferir
+                else:
+                    # Si el estado de destino no existe en la celda, crearlo
+                    celda['states'][estado_destino] = {
+                        'population': cantidad_transferir, 'counter': 0}
+
+    return celda
+
+
+def verificar_condiciones_transicion(poblacion_vecinos, transiciones):
+    resultados = []
+
+    for i in range(len(transiciones[0])):
+        estado_actual = transiciones[0][i]
+        estado_destino = transiciones[1][i]
+        estado_vecino_requerido = transiciones[2][i]
+        operador = transiciones[3][i]
+        numero_requerido = transiciones[4][i]
+
+        # Verificar si el estado de los vecinos requerido está presente y cumple la condición
+        poblacion_vecino = poblacion_vecinos.get(estado_vecino_requerido, 0)
+        condicion = f"{poblacion_vecino} {operador} {numero_requerido}"
+        if eval(condicion):
+            resultado = (estado_actual, estado_destino, True)
+        else:
+            resultado = (estado_actual, estado_destino, False)
+
+        resultados.append(resultado)
+
+    return resultados
+
+
+def obtener_poblacion_total_de_vecinos(matriz, coordenadas_vecinos):
+    poblacion_por_estado = {}
+
+    for coord in coordenadas_vecinos:
+        x, y, z = coord
+        vecino = matriz[x][y][z]
+        for estado, info in vecino['states'].items():
+            if estado not in poblacion_por_estado:
+                poblacion_por_estado[estado] = 0
+            poblacion_por_estado[estado] += info['population']
+
+    return poblacion_por_estado
+
+
+def obtener_reglas(cell_transitions):
+    transicionar = []
+    hacia = []
+    si_existen = []
+    operador = []
+    condicion = []
+
+    for estado, transiciones in cell_transitions.items():
+        for transicion in transiciones:
+            transicionar.append(estado)
+            hacia.append(transicion['to'])
+            si_existen.append(transicion['condition']['state'])
+            operador.append(transicion['condition']['operator'])
+            condicion.append(transicion['condition']['number'])
+
+    return transicionar, hacia, si_existen, operador, condicion
 
 
 def obtener_vecinos(x, y, z, matriz):
     vecinos = []
     D1, D2, D3 = len(matriz), len(matriz[0]), len(matriz[0][0])
-    # Vecinos en la misma capa
     for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
         nx, ny = x + dx, y + dy
         if 0 <= nx < D1 and 0 <= ny < D2:
             vecinos.append((nx, ny, z))
-    # Vecino inmediatamente arriba e inmediatamente debajo
     for dz in [-1, 1]:
         nz = z + dz
         if 0 <= nz < D3:
             vecinos.append((x, y, nz))
     return vecinos
-
-
-def obtener_vecindades(matriz):
-    vecindades = []
-    nx, ny, nz = len(matriz), len(matriz[0]), len(matriz[0][0])
-
-    for i in range(nx):
-        for j in range(ny):
-            for k in range(nz):
-                celda_info = {
-                    'capa': i,
-                    'identificador': (i, j, k),
-                    'vecinos': obtener_vecinos(i, j, k, matriz)
-                }
-                vecindades.append(celda_info)
-    return vecindades
 
 
 def actualizar_vecindad(matriz, duration_transitions, state_durations):
@@ -253,16 +267,7 @@ def realizar_transacciones_entre_celdas(matriz):
                 celda_actual = matriz[i][j][k]
 
                 if not celda_actual['BLOQUEADO']:
-                    vecinos = []
-                    for dx in [-1, 0, 1]:
-                        for dy in [-1, 0, 1]:
-                            for dz in [-1, 0, 1]:
-                                if dx == dy == dz == 0:
-                                    continue
-                                nx_coord, ny_coord, nz_coord = i + dx, j + dy, k + dz
-                                if 0 <= nx_coord < nx and 0 <= ny_coord < ny and 0 <= nz_coord < nz:
-                                    vecinos.append(
-                                        (nx_coord, ny_coord, nz_coord))
+                    vecinos = obtener_vecinos(i, j, k, matriz)
 
                     if vecinos:
                         vecino_destino = random.choice(vecinos)
@@ -272,57 +277,27 @@ def realizar_transacciones_entre_celdas(matriz):
                         if not celda_destino['BLOQUEADO']:
                             estados_actuales = list(
                                 celda_actual['states'].keys())
-                            estado_origen = random.choice(estados_actuales)
+                            if estados_actuales:
+                                estado_origen = random.choice(estados_actuales)
 
-                            estados_destino = list(
-                                celda_destino['states'].keys())
-                            estado_destino = random.choice(estados_destino)
+                                estados_destino = list(
+                                    celda_destino['states'].keys())
+                                estado_destino = random.choice(
+                                    estados_destino) if estados_destino else estado_origen
 
-                            poblacion_actual = celda_actual['states'][estado_origen]['population']
-                            if poblacion_actual > 0:
-                                poblacion_a_transferir = random.randint(
-                                    1, poblacion_actual)
+                                poblacion_actual = celda_actual['states'][estado_origen]['population']
+                                if poblacion_actual > 0:
+                                    poblacion_a_transferir = random.randint(
+                                        1, poblacion_actual)
 
-                                celda_actual['states'][estado_origen]['population'] -= poblacion_a_transferir
+                                    celda_actual['states'][estado_origen]['population'] -= poblacion_a_transferir
 
-                                if estado_destino in celda_destino['states']:
-                                    celda_destino['states'][estado_destino]['population'] += poblacion_a_transferir
-                                else:
-                                    celda_destino['states'][estado_destino] = {
-                                        'population': poblacion_a_transferir, 'counter': 0}
+                                    # Eliminar el estado si su población llega a 0
+                                    if celda_actual['states'][estado_origen]['population'] == 0:
+                                        del celda_actual['states'][estado_origen]
 
-
-def verificar_condiciones_transicion(matriz, cell_transitions):
-    for i in range(len(matriz)):
-        for j in range(len(matriz[0])):
-            for k in range(len(matriz[0][0])):
-                celda = matriz[i][j][k]
-                for estado_actual, transiciones in cell_transitions.items():
-                    for transicion in transiciones:
-                        estado_destino = transicion['to']
-                        condicion = transicion['condition']
-                        poblacion_transicion = 0
-                        if condicion['operator'] == '>=':
-                            if estado_actual in celda['states'] and estado_actual in celda['states']:
-                                poblacion_actual = celda['states'][estado_actual]['population']
-                                if poblacion_actual >= condicion['number']:
-                                    poblacion_transicion = poblacion_actual // 2  # Ejemplo de población a transferir
-                        # Realiza la transición si se cumple la condición
-                        if poblacion_transicion > 0:
-                            realizar_transicion(
-                                celda, estado_actual, estado_destino, poblacion_transicion)
-
-
-def realizar_transicion(celda, estado_actual, estado_destino, poblacion_transicion):
-    # Resta la población del estado actual
-    celda['states'][estado_actual]['population'] -= poblacion_transicion
-    # Agrega la población al estado de destino
-    if estado_destino in celda['states']:
-        celda['states'][estado_destino]['population'] += poblacion_transicion
-    else:
-        # Crea el estado de destino si no existe
-        celda['states'][estado_destino] = {
-            'population': poblacion_transicion, 'counter': 0}
-    # Imprime un mensaje
-    print(
-        f"Transición: {estado_actual} -> {estado_destino}, Población Transicionada: {poblacion_transicion}")
+                                    if estado_destino in celda_destino['states']:
+                                        celda_destino['states'][estado_destino]['population'] += poblacion_a_transferir
+                                    else:
+                                        celda_destino['states'][estado_destino] = {
+                                            'population': poblacion_a_transferir, 'counter': 0}

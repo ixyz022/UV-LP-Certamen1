@@ -65,6 +65,8 @@ def realizar_simulacion(file_path):
         simulate_contagion02(
             visitor.matrix_3d, visitor.duration_structure, visitor.prob_transitions, visitor.cell_transitions, num_steps)
 
+        # print(" A\n", visitor.cell_transitions, visitor.matrix_3d)
+
 
 # cd app
 parser = argparse.ArgumentParser(description='Procesar archivo especificado.')
