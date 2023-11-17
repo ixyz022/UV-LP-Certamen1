@@ -85,7 +85,7 @@ def imprimir_matriz(matriz, num_step):
                 cell = matriz[i][j][k]
                 cell_str = f"B" if cell['BLOQUEADO'] else ""
                 states_str = ", ".join(
-                    [f"{estado}: {info['population']}" for estado, info in cell['states'].items()])
+                    [f"{estado}:{info['population']}({info['counter']})" for estado, info in cell['states'].items()])
                 if cell_str and states_str:
                     fila.append(f"{cell_str} ({states_str})")
                 elif cell_str:
@@ -100,11 +100,12 @@ def imprimir_matriz(matriz, num_step):
 
 
 def simulate_contagion02(matrix, duration_structure, prob_transitions, cell_transitions, num_steps):
+    print(matrix)
     imprimir_matriz(matrix, -1)  # Mostrar matriz inicial
-    for i in range(num_steps):
 
-        vecindades = obtener_vecindades(matrix)
-        print(vecindades)
+    for i in range(num_steps):
+        actualizar_vecindad(matrix,
+                            prob_transitions, duration_structure)
         imprimir_matriz(matrix, i)
     #     verificar_condiciones_transicion(matrix, cell_transitions)
     #     actualizar_vecindad(matrix, duration_structure, prob_transitions)
@@ -145,50 +146,49 @@ def obtener_vecindades(matriz):
     return vecindades
 
 
-def actualizar_vecindad(matriz, duration_transitions, prob_transitions):
+def actualizar_vecindad(matriz, duration_transitions, state_durations):
     D1, D2, D3 = len(matriz), len(matriz[0]), len(matriz[0][0])
     for i in range(D1):
         for j in range(D2):
             for k in range(D3):
-                for estado in matriz[i][j][k]["states"]:
-                    matriz[i][j][k]["states"][estado]["counter"] += 1
-                    matriz[i][j][k] = transicionar_estado(
-                        duration_transitions, matriz[i][j][k], prob_transitions)
+                estados = list(matriz[i][j][k]['states'].keys())
+                for estado in estados:
+                    # Comprueba si el estado sigue existiendo ya que podría haberse eliminado en una iteración anterior
+                    if estado not in matriz[i][j][k]['states']:
+                        continue
+
+                    info = matriz[i][j][k]['states'][estado]
+                    info['counter'] += 1
+                    nuevo_estado, nuevo_info = transicionar_estado(
+                        duration_transitions, state_durations, estado, info)
+
+                    if nuevo_estado != estado:
+                        # Si el nuevo estado ya existe, migra la población
+                        if nuevo_estado in matriz[i][j][k]['states']:
+                            matriz[i][j][k]['states'][nuevo_estado]['population'] += info['population']
+                        else:
+                            matriz[i][j][k]['states'][nuevo_estado] = nuevo_info
+
+                        # Elimina el estado antiguo
+                        del matriz[i][j][k]['states'][estado]
 
 
-def transicionar_estado(duration_transitions, celda, prob_transitions):
-    new_states = {}  # Crear un nuevo diccionario para almacenar los estados actualizados
-    for estado, info in celda['states'].items():
-        contador_actual = info['counter']
-        # Comprobar si el contador actual coincide con alguna duración en duration_transitions
-        duration_match = next(
-            (item for item in duration_transitions if item['state'] == estado and item['duration'] == contador_actual), None)
-        if duration_match:
+def transicionar_estado(duration_transitions, state_durations, estado_actual, info):
+    contador_actual = info['counter']
+
+    for duracion in state_durations:
+        if contador_actual >= duracion["duration"] and estado_actual == duracion["state"]:
             valor_aleatorio = random.random()
-            resultado_transicion = get_closest_transition(
-                estado, valor_aleatorio, prob_transitions
-            )
-            # print(celda, resultado_transicion, estado)
-            if resultado_transicion and resultado_transicion != estado:
-                # Si hay una transición y el estado resultante es diferente, actualizar la entrada
-                info['counter'] = 0  # Restablecer el contador
-                if resultado_transicion in new_states:
-                    # Si el estado resultante ya existe en new_states, suma la población
-                    new_states[resultado_transicion]["population"] += info["population"]
-                else:
-                    # Si el estado resultante no existe en new_states, créalo
-                    new_states[resultado_transicion] = info.copy()
-            else:
-                # Mantener el estado actual si no hay transición
-                new_states[estado] = info
-        else:
-            # Mantener el estado actual si no hay coincidencia de duración
-            new_states[estado] = info
-    # Reemplazar los estados antiguos con los nuevos estados
-    # print("NUEVA", new_states)
-    # print(celda)
-    celda['states'] = new_states
-    return celda
+            nuevo_estado = get_closest_transition(
+                estado_actual, valor_aleatorio, duration_transitions)
+
+            if nuevo_estado != estado_actual:
+                info['state'] = nuevo_estado
+                info['counter'] = 0
+
+            return nuevo_estado, info
+
+    return estado_actual, info
 
 
 def get_closest_transition(state, random_value, transitions_dict):
